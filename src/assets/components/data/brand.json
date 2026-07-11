@@ -1,0 +1,7 @@
+[
+    { "id": "kopken", "categoryId": "minuman", "name": "Kopi Kenangan", "logo": "/logo/kopken.png", "tagline": "Harga spesial, kualitas terjamin ✨" },
+    { "id": "tomoro", "categoryId": "minuman", "name": "Tomoro Coffee", "logo": "/logo/tomoro.png", "tagline": "Harga spesial, kualitas terjamin ✨" },
+    { "id": "janjijiwa", "categoryId": "minuman", "name": "Janji Jiwa", "logo": "/logo/janjiw.png", "tagline": "Harga spesial, kualitas terjamin ✨" },
+    { "id": "fore", "categoryId": "minuman", "name": "Fore Coffee", "logo": "/logo/fore.png", "tagline": "Harga spesial, kualitas terjamin ✨" },
+    { "id": "chagee", "categoryId": "minuman", "name": "Chagee", "logo": "/logo/chagee.PNG", "tagline": "Harga spesial, kualitas terjamin ✨" }
+  ]
