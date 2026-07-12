@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Navbar } from "../assets/components/layout/Navbar";
 import { HeroSection } from "../assets/components/layout/HeroSection";
 import {
@@ -14,6 +14,7 @@ import { FloatingCartButton } from "../assets/components/layout/FloatingCartButt
 import { Footer } from "../assets/components/layout/Footer";
 
 export const Homepage = () => {
+  const productListRef = useRef(null);
   const [selectedBrandId, setSelectedBrandId] = useState(DEFAULT_BRAND_ID);
   const [mode, setMode] = useState("satuan");
   const [cart, setCart] = useState([]);
@@ -40,6 +41,14 @@ export const Homepage = () => {
     0,
   );
 
+  const handleChangeFilter = (filterId) => {
+    setActiveFilter(filterId);
+    productListRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   const handleOpenCart = () => {
     // TODO: buka drawer/modal keranjang
     console.log("Open cart:", cart);
@@ -56,24 +65,26 @@ export const Homepage = () => {
           mode={mode}
           onChangeMode={handleChangeMode}
         />
-        <div className="mt-6 sm:mt-8">
+        <div className="mb-4 mt-6 sm:mt-8">
           <SearchMenu selectedBrandId={selectedBrandId} />
         </div>
         {mode === "satuan" && (
-          <div className="mt-4">
+          <div className="sticky top-0 z-30 -mx-4 bg-slate-100/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
             <FilterMenu
               selectedBrandId={selectedBrandId}
               activeFilter={activeFilter}
-              onChangeFilter={setActiveFilter}
+              onChangeFilter={handleChangeFilter}
             />
           </div>
         )}
-        <ProductList
-          selectedBrandId={selectedBrandId}
-          mode={mode}
-          activeFilter={activeFilter}
-          onAddToCart={handleAddToCart}
-        />
+        <div ref={productListRef} className="scroll-mt-20">
+          <ProductList
+            selectedBrandId={selectedBrandId}
+            mode={mode}
+            activeFilter={activeFilter}
+            onAddToCart={handleAddToCart}
+          />
+        </div>
         <Footer />
       </div>
       <ScrollToTopButton />
