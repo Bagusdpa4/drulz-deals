@@ -91,7 +91,7 @@ export const GuideOrder = ({ open, onClose, onOrderNow }) => {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/60 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/60 p-0 backdrop-blur-sm sm:p-4">
       <div className="relative flex max-h-[80vh] w-full max-w-[85vw] flex-col overflow-hidden rounded-3xl bg-white md:max-w-2xl md:rounded-3xl">
         {/* Header */}
         <div className="flex items-start justify-between border-b border-slate-100 px-6 py-5">
