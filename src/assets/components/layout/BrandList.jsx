@@ -4,9 +4,9 @@ import { getBrands } from "../../lib/useBrands";
 
 const BRANDS = getBrands("minuman");
 const ITEMS_PER_PAGE_MOBILE = 3;
+export const DEFAULT_BRAND_ID = BRANDS[0]?.id ?? null;
 
-export const BrandList = () => {
-  const [selected, setSelected] = useState(BRANDS[0]?.id ?? null);
+export const BrandList = ({ selected, onSelect }) => {
   const [page, setPage] = useState(0);
   const scrollRef = useRef(null);
 
@@ -21,8 +21,7 @@ export const BrandList = () => {
   const handleScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
-    const newPage = Math.round(el.scrollLeft / el.clientWidth);
-    setPage(newPage);
+    setPage(Math.round(el.scrollLeft / el.clientWidth));
   };
 
   const renderCard = (brand) => {
@@ -30,7 +29,7 @@ export const BrandList = () => {
     return (
       <button
         key={brand.id}
-        onClick={() => setSelected(brand.id)}
+        onClick={() => onSelect(brand.id)}
         className={`flex w-28 shrink-0 flex-col items-center gap-1 rounded-xl border p-2 text-center transition-all duration-300 ease-out sm:w-40 sm:gap-1.5 sm:rounded-2xl sm:p-3 ${
           isActive
             ? "border-neutral-900 bg-neutral-900 text-white"
@@ -83,7 +82,6 @@ export const BrandList = () => {
         </h2>
       </div>
 
-      {/* Mobile: swipeable, snaps 3-per-page, no arrow buttons */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
@@ -99,21 +97,17 @@ export const BrandList = () => {
         ))}
       </div>
 
-      {/* Mobile page dots — indicates it's swipeable */}
       {totalPages > 1 && (
         <div className="mt-2 flex justify-center gap-1.5 sm:hidden">
           {Array.from({ length: totalPages }).map((_, i) => (
             <span
               key={i}
-              className={`h-1.5 rounded-full transition-all ${
-                i === page ? "w-4 bg-neutral-900" : "w-1.5 bg-neutral-300"
-              }`}
+              className={`h-1.5 rounded-full transition-all ${i === page ? "w-4 bg-neutral-900" : "w-1.5 bg-neutral-300"}`}
             />
           ))}
         </div>
       )}
 
-      {/* Desktop/tablet: all brands, centered, wraps naturally — untouched */}
       <div className="mt-3 hidden flex-wrap justify-center gap-2 sm:flex sm:gap-3">
         {BRANDS.map(renderCard)}
       </div>
