@@ -10,7 +10,7 @@ export const HeroSection = () => {
 
   return (
     <section className="px-0 pt-4 sm:px-5 sm:pt-6">
-      <div className="shadow-xs relative overflow-hidden rounded-2xl bg-orange-100 px-5 py-6 sm:rounded-3xl sm:px-8 sm:py-8">
+      <div className="shadow-sm relative overflow-hidden rounded-2xl bg-orange-100 px-5 py-6 sm:rounded-3xl sm:px-8 sm:py-8">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-[12px] font-bold text-orange-600 shadow-lg sm:px-3 sm:text-xs">
           <Flame size={14} />
           PROMO SPESIAL

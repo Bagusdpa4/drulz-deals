@@ -10,7 +10,7 @@ export const SearchMenu = ({ selectedBrandId }) => {
 
   return (
     <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3">
-      <div className="flex flex-1 items-center gap-3 rounded-full bg-white px-5 py-3.5 shadow-sm">
+      <div className="flex flex-1 items-center gap-3 rounded-full border border-slate-300 bg-white px-5 py-3.5 shadow-sm">
         <Search size={20} className="shrink-0 text-neutral-400" />
         <input
           type="text"
@@ -34,9 +34,9 @@ export const SearchMenu = ({ selectedBrandId }) => {
             ? undefined
             : "WiFi hanya tersedia untuk Kopi Kenangan & Fore Coffee"
         }
-        className={`flex shrink-0 items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-colors ${
+        className={`flex shrink-0 items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold shadow-sm transition-colors ${
           hasWifi
-            ? "cursor-pointer bg-neutral-900 text-white hover:bg-neutral-700"
+            ? "cursor-pointer bg-neutral-900 text-white hover:scale-105 hover:bg-neutral-700"
             : "cursor-not-allowed bg-slate-200 text-neutral-400"
         }`}
       >

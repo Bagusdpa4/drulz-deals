@@ -30,10 +30,10 @@ export const BrandList = ({ selected, onSelect }) => {
       <button
         key={brand.id}
         onClick={() => onSelect(brand.id)}
-        className={`flex w-28 shrink-0 flex-col items-center gap-1 rounded-xl border p-2 text-center transition-all duration-300 ease-out sm:w-40 sm:gap-1.5 sm:rounded-2xl sm:p-3 ${
+        className={`flex w-28 shrink-0 flex-col items-center gap-1 rounded-xl border p-2 text-center shadow-sm transition-all duration-300 ease-out sm:w-40 sm:gap-2 sm:rounded-2xl sm:p-3 ${
           isActive
             ? "border-neutral-900 bg-neutral-900 text-white"
-            : "cursor-pointer border-neutral-200 bg-white text-neutral-900 hover:border-orange-300"
+            : "cursor-pointer border-neutral-200 bg-white text-neutral-900 hover:scale-105 hover:border-orange-300"
         }`}
       >
         <div
@@ -85,7 +85,7 @@ export const BrandList = ({ selected, onSelect }) => {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="scrollbar-none mt-3 flex snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] sm:hidden [&::-webkit-scrollbar]:hidden"
+        className="scrollbar-none py-4 mt-3 flex snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] sm:hidden [&::-webkit-scrollbar]:hidden"
       >
         {pages.map((groupBrands, i) => (
           <div
@@ -98,7 +98,7 @@ export const BrandList = ({ selected, onSelect }) => {
       </div>
 
       {totalPages > 1 && (
-        <div className="mt-2 flex justify-center gap-1.5 sm:hidden">
+        <div className="mt-4 flex justify-center gap-1.5 sm:hidden">
           {Array.from({ length: totalPages }).map((_, i) => (
             <span
               key={i}
@@ -108,7 +108,7 @@ export const BrandList = ({ selected, onSelect }) => {
         </div>
       )}
 
-      <div className="mt-3 hidden flex-wrap justify-center gap-2 sm:flex sm:gap-3">
+      <div className="mt-3 hidden flex-wrap justify-center gap-2 sm:flex sm:gap-4">
         {BRANDS.map(renderCard)}
       </div>
     </section>

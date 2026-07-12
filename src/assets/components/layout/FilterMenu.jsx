@@ -21,10 +21,10 @@ export const FilterMenu = () => {
           <button
             key={filter.id}
             onClick={() => setActive(filter.id)}
-            className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-wide transition-colors ${
+            className={`flex shrink-0 items-center gap-3 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-wide shadow-sm transition-colors ${
               isActive
-                ? "border-neutral-900 bg-neutral-900 text-white"
-                : "cursor-pointer border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300"
+                ? "bg-neutral-900 text-white"
+                : "cursor-pointer border border-slate-300 bg-white text-neutral-600 hover:scale-105 hover:border-orange-300"
             }`}
           >
             <Icon
