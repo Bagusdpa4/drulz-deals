@@ -10,7 +10,7 @@ export const HeroSection = () => {
 
   return (
     <section className="px-0 pt-4 sm:px-5 sm:pt-6">
-      <div className="shadow-sm relative overflow-hidden rounded-2xl bg-orange-100 px-5 py-6 sm:rounded-3xl sm:px-8 sm:py-8">
+      <div className="relative overflow-hidden rounded-2xl bg-orange-100 px-5 py-6 shadow-sm sm:rounded-3xl sm:px-8 sm:py-8">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-[12px] font-bold text-orange-600 shadow-lg sm:px-3 sm:text-xs">
           <Flame size={14} />
           PROMO SPESIAL
@@ -29,7 +29,7 @@ export const HeroSection = () => {
             <CheckSquare size={16} />
             Cara Pemesanan
           </button>
-          <button className="flex cursor-pointer items-center gap-1.5 rounded-full border border-neutral-900 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:scale-105 sm:gap-2 sm:px-5 sm:py-3">
+          <button className="flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3">
             <MessageSquareQuote size={16} />
             Testimonial
           </button>
