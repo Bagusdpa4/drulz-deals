@@ -1,37 +1,34 @@
-import React, { useState } from "react";
-import { Star, Coffee, CircleDashed, Cloud, Leaf } from "lucide-react";
+import React from "react";
+import { LayoutGrid } from "lucide-react";
+import { getSatuanCategories } from "../../lib/useCatalog";
 
-const FILTERS = [
-  { id: "tomoro-signature", label: "Tomoro Signature", icon: Star },
-  { id: "classic-coffee", label: "Classic Coffee", icon: Coffee },
-  { id: "fruity-series", label: "Fruity Series", icon: CircleDashed },
-  { id: "cloud-series", label: "Cloud Series", icon: Cloud },
-  { id: "non-coffee", label: "Non Coffee", icon: Leaf },
-];
+export const FilterMenu = ({
+  selectedBrandId,
+  activeFilter,
+  onChangeFilter,
+}) => {
+  const categories = getSatuanCategories(selectedBrandId);
+  if (categories.length === 0) return null;
 
-export const FilterMenu = () => {
-  const [active, setActive] = useState(FILTERS[0].id);
+  const filters = [{ id: "all", label: "Semua" }, ...categories];
 
   return (
-    <div className="scrollbar-none flex gap-2.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-      {FILTERS.map((filter) => {
-        const Icon = filter.icon;
-        const isActive = active === filter.id;
+    <div className="scrollbar-none flex md:justify-center gap-2.5 overflow-x-auto pb-1 px-2 py-2 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      {filters.map((filter) => {
+        const isActive = activeFilter === filter.id;
         return (
           <button
             key={filter.id}
-            onClick={() => setActive(filter.id)}
-            className={`flex shrink-0 items-center gap-3 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-wide shadow-sm transition-colors ${
+            onClick={() => onChangeFilter(filter.id)}
+            className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-wide shadow-sm transition-colors ${
               isActive
-                ? "bg-neutral-900 text-white"
-                : "cursor-pointer border border-slate-300 bg-white text-neutral-600 hover:scale-105 hover:border-orange-300"
+                ? "border-neutral-900 bg-neutral-900 text-white"
+                : "cursor-pointer border-slate-300 bg-white text-neutral-600 hover:scale-105 hover:border-orange-300"
             }`}
           >
-            <Icon
+            <LayoutGrid
               size={16}
-              className={
-                isActive ? "fill-white text-white" : "text-neutral-500"
-              }
+              className={isActive ? "text-white" : "text-neutral-500"}
             />
             {filter.label}
           </button>
