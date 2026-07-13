@@ -27,7 +27,7 @@ export const BundlingCard = ({ bundle, onSelect }) => {
         <img
           src={bundle.image}
           alt={bundle.name}
-          className="h-full w-full object-cover"
+          className="max-h-full max-w-full object-contain"
           onError={(e) => {
             e.currentTarget.style.display = "none";
           }}
