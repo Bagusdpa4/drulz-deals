@@ -10,48 +10,50 @@ export const HeroSection = () => {
 
   return (
     <section className="px-0 pt-4 sm:px-5 sm:pt-6">
-      <div className="relative overflow-hidden rounded-2xl bg-orange-100 px-5 py-6 shadow-sm sm:rounded-3xl sm:px-8 sm:py-8">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-[12px] font-bold text-orange-600 shadow-lg sm:px-3 sm:text-xs">
-          <Flame size={14} />
-          PROMO SPESIAL
-        </span>
+      <div className="relative overflow-hidden rounded-2xl bg-orange-100 shadow-sm sm:rounded-3xl">
+        <div className="flex flex-col items-center gap-6 px-5 py-6 sm:px-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+          {/* Left: text content */}
+          <div className="w-full text-center lg:max-w-lg lg:text-left">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-[12px] font-bold text-orange-600 shadow-sm sm:px-3 sm:text-xs">
+              <Flame size={14} />
+              PROMO SPESIAL
+            </span>
 
-        <h1 className="mt-3 max-w-full pr-16 text-2xl font-extrabold leading-tight text-neutral-900 sm:max-w-md sm:pr-0 sm:text-3xl md:text-4xl">
-          Pesan Kopi Kenangan, Tomoro, Fore &amp; Lainnya{" "}
-          <span className="text-orange-500">Lebih Hemat!</span>
-        </h1>
+            <h1 className="mt-3 text-xl font-extrabold leading-tight text-neutral-900 sm:text-3xl md:text-4xl">
+              Semua Promo, Satu Tempat.{" "}
+              <span className="text-orange-500">
+                Coffee &bull; Tea &bull; Food &bull; Deals
+              </span>
+            </h1>
 
-        <div className="mt-4 flex flex-wrap gap-2.5 sm:gap-3">
-          <button
-            onClick={() => setShowGuide(true)}
-            className="flex cursor-pointer items-center gap-1.5 rounded-full border bg-neutral-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:scale-105 sm:gap-2 sm:px-5 sm:py-3"
-          >
-            <CheckSquare size={16} />
-            Cara Pemesanan
-          </button>
-          <button className="flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3">
-            <MessageSquareQuote size={16} />
-            Testimonial
-          </button>
+            <p className="mt-2 text-sm font-medium text-neutral-500 sm:text-base">
+              * Harga tertera sudah termasuk fee
+            </p>
+
+            <div className="mt-4 flex flex-wrap justify-center gap-2.5 sm:gap-3 lg:justify-start">
+              <button
+                onClick={() => setShowGuide(true)}
+                className="flex cursor-pointer items-center gap-1.5 rounded-full border bg-neutral-900 px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 sm:gap-2 sm:px-5 sm:py-3"
+              >
+                <CheckSquare size={16} />
+                Cara Pemesanan
+              </button>
+              <button className="flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3">
+                <MessageSquareQuote size={16} />
+                Testimonial
+              </button>
+            </div>
+          </div>
+
+          {/* Right: image */}
+          <div className="w-full max-w-[280px] shrink-0 sm:max-w-xs lg:w-auto lg:max-w-sm">
+            <img
+              src="/hero.PNG"
+              alt="Promo Drulz Deals"
+              className="h-full w-full object-contain"
+            />
+          </div>
         </div>
-
-        <div className="pointer-events-none absolute -right-4 bottom-0 hidden h-full items-end gap-2 opacity-90 lg:flex">
-          <div className="bg-linear-to-b h-32 w-14 rounded-t-full from-amber-800 to-amber-950" />
-          <div className="bg-linear-to-b h-40 w-14 rounded-t-full from-amber-200 to-amber-400" />
-          <div className="bg-linear-to-b h-36 w-14 rounded-t-full from-lime-200 to-lime-400" />
-        </div>
-
-        {/* <div className="absolute right-3 top-3 flex h-12 w-12 flex-col items-center justify-center rounded-full bg-orange-500 text-center text-white shadow-md sm:right-6 sm:top-6 sm:h-16 sm:w-16 md:right-10">
-          <span className="text-[7px] font-medium leading-none sm:text-[10px]">
-            HEMAT
-          </span>
-          <span className="text-[9px] font-extrabold leading-tight sm:text-sm">
-            SAMPAI
-          </span>
-          <span className="text-[9px] font-extrabold leading-none sm:text-sm">
-            40%
-          </span>
-        </div> */}
       </div>
 
       <GuideOrder
