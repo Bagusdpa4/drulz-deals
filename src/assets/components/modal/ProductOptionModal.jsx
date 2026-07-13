@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { X, Minus, Plus, Flame, Snowflake } from "lucide-react";
 import { formatRupiah } from "../../lib/useCatalog";
-import { useBodyScrollLock } from "../../lib/useBodyScrollLock";
 
 const ICE_LEVELS = [
   { id: "normal_ice", label: "Normal Ice" },
@@ -53,7 +52,7 @@ const SWEETNESS_LABELS = {
 };
 
 // Field-field ini hanya muncul pada item minuman di JSON.
-// Kalau produk tidak punya satupun field ini, dianggap makanan/snack (ketentuan #3).
+// Kalau produk tidak punya satupun field ini, dianggap makanan/snack.
 const DRINK_INDICATOR_KEYS = [
   "sizes",
   "noHot",
@@ -67,6 +66,10 @@ const DRINK_INDICATOR_KEYS = [
 
 const isDrinkProduct = (product) =>
   DRINK_INDICATOR_KEYS.some((key) => product?.[key] !== undefined);
+
+// Kategori "Foreveryone 1L" ditandai dengan field "sweetness" (lowercase),
+// beda dari "allowedSweet" yang dipakai minuman satuan biasa.
+const isForeveryone1LProduct = (product) => Array.isArray(product?.sweetness);
 
 // Batas maksimal karakter untuk kolom "Catatan"
 const NOTES_MAX_LENGTH = 250;
@@ -105,37 +108,47 @@ const OptionPill = ({ active, onClick, children, extra }) => (
 
 export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
   const isDrink = isDrinkProduct(product);
+  const isForeveryone1L = isForeveryone1LProduct(product);
 
   const sizeKeys = product?.sizes ? Object.keys(product.sizes) : [];
   const [selectedSize, setSelectedSize] = useState(sizeKeys[0] ?? null);
 
-  // Ketentuan #2: aturan hot/ice
-  const forcedIced = !!product?.noHot; // noHot -> hanya es
-  const forcedHot = !!product?.noIce; // noIce -> hanya hot (juga dipakai utk espresso)
-  const showTempSelector = isDrink && !forcedIced && !forcedHot;
+  // Ketentuan hot/ice — dimatikan total untuk Foreveryone 1L
+  const forcedIced = !!product?.noHot;
+  const forcedHot = !!product?.noIce;
+  const showTempSelector =
+    isDrink && !isForeveryone1L && !forcedIced && !forcedHot;
 
   const [temp, setTemp] = useState(
     forcedIced ? "ice" : forcedHot ? "hot" : "ice",
   );
   const effectiveTemp = forcedIced ? "ice" : forcedHot ? "hot" : temp;
 
-  const showIceLevel = isDrink && effectiveTemp === "ice";
-  const showSugar = isDrink && !product?.noSugar;
+  const showIceLevel = isDrink && !isForeveryone1L && effectiveTemp === "ice";
+  const showSugar = isDrink && !isForeveryone1L && !product?.noSugar;
+
+  // Untuk Foreveryone 1L, espresso & dairy TIDAK ditampilkan & TIDAK dikenakan biaya,
+  // meskipun datanya ada di JSON (mengikuti ketentuan: modal hanya Sweet Level + Catatan)
+  const showEspresso = !isForeveryone1L && product?.allowedEspresso?.length > 0;
+  const showDairy = !isForeveryone1L && product?.allowedDairy?.length > 0;
+
+  // Sumber pilihan sweet level: "sweetness" (Foreveryone 1L) atau "allowedSweet" (minuman biasa)
+  const sweetOptions = isForeveryone1L
+    ? (product?.sweetness ?? [])
+    : (product?.allowedSweet ?? []);
 
   const [ice, setIce] = useState("normal_ice");
   const [sugar, setSugar] = useState("normal_sugar");
   const [espresso, setEspresso] = useState(
-    product?.allowedEspresso?.[0] ?? null,
+    !isForeveryone1L ? (product?.allowedEspresso?.[0] ?? null) : null,
   );
-  const [dairy, setDairy] = useState(product?.allowedDairy?.[0] ?? null);
-  const [sweetness, setSweetness] = useState(
-    product?.allowedSweet?.[0] ?? null,
+  const [dairy, setDairy] = useState(
+    !isForeveryone1L ? (product?.allowedDairy?.[0] ?? null) : null,
   );
+  const [sweetness, setSweetness] = useState(sweetOptions[0] ?? null);
   const [toppings, setToppings] = useState([]);
   const [qty, setQty] = useState(1);
   const [notes, setNotes] = useState("");
-
-  useBodyScrollLock(open);
 
   const activePrice = useMemo(() => {
     if (!product) return { price: 0, discPrice: 0 };
@@ -149,8 +162,11 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
     [toppings],
   );
 
-  const espressoSurcharge = espresso ? (ESPRESSO_SURCHARGE[espresso] ?? 0) : 0;
-  const dairySurcharge = dairy ? (DAIRY_SURCHARGE[dairy] ?? 0) : 0;
+  // Surcharge espresso/dairy tidak berlaku untuk Foreveryone 1L
+  const espressoSurcharge =
+    !isForeveryone1L && espresso ? (ESPRESSO_SURCHARGE[espresso] ?? 0) : 0;
+  const dairySurcharge =
+    !isForeveryone1L && dairy ? (DAIRY_SURCHARGE[dairy] ?? 0) : 0;
 
   const unitPrice =
     (activePrice?.discPrice ?? activePrice?.price ?? 0) +
@@ -173,11 +189,11 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
     onAdd?.({
       ...product,
       selectedSize,
-      temperature: isDrink ? effectiveTemp : null,
+      temperature: isDrink && !isForeveryone1L ? effectiveTemp : null,
       ice: showIceLevel ? ice : null,
       sugar: showSugar ? sugar : null,
-      espresso,
-      dairy,
+      espresso: !isForeveryone1L ? espresso : null,
+      dairy: !isForeveryone1L ? dairy : null,
       sweetness,
       toppings,
       qty,
@@ -194,7 +210,7 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
       onClick={onClose}
     >
       <div
-        className="relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-3xl bg-white sm:max-h-[85vh] sm:rounded-3xl"
+        className="relative flex max-h-[75vh] w-full max-w-md flex-col overflow-hidden rounded-t-3xl bg-white sm:max-h-[85vh] sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header image */}
@@ -214,13 +230,13 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
           >
             <X size={16} />
           </button>
-          {forcedIced && (
+          {!isForeveryone1L && forcedIced && (
             <span className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-neutral-900 px-2.5 py-1 text-[10px] font-bold text-white">
               <Snowflake size={11} />
               Iced Only
             </span>
           )}
-          {forcedHot && (
+          {!isForeveryone1L && forcedHot && (
             <span className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-neutral-900 px-2.5 py-1 text-[10px] font-bold text-white">
               <Flame size={11} />
               Hot Only
@@ -315,8 +331,48 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
             </>
           )}
 
-          {/* ==== KHUSUS MINUMAN ==== */}
-          {isDrink && (
+          {/* ==== KHUSUS FOREVERYONE 1L: cuma Sweet Level + Catatan ==== */}
+          {isDrink && isForeveryone1L && (
+            <>
+              {sweetOptions.length > 0 && (
+                <OptionGroup label="Sweet Level">
+                  {sweetOptions.map((key) => (
+                    <OptionPill
+                      key={key}
+                      active={sweetness === key}
+                      onClick={() => setSweetness(key)}
+                    >
+                      {SWEETNESS_LABELS[key] ?? key}
+                    </OptionPill>
+                  ))}
+                </OptionGroup>
+              )}
+
+              <div>
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-xs font-bold uppercase tracking-wide text-neutral-500">
+                    Catatan
+                  </p>
+                  <span className="text-[10px] font-medium text-neutral-400">
+                    {notes.length}/{NOTES_MAX_LENGTH}
+                  </span>
+                </div>
+                <textarea
+                  value={notes}
+                  onChange={(e) =>
+                    setNotes(e.target.value.slice(0, NOTES_MAX_LENGTH))
+                  }
+                  maxLength={NOTES_MAX_LENGTH}
+                  placeholder="Contoh: less sweet, dll"
+                  rows={4}
+                  className="w-full resize-none rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none"
+                />
+              </div>
+            </>
+          )}
+
+          {/* ==== MINUMAN BIASA (bukan Foreveryone 1L) ==== */}
+          {isDrink && !isForeveryone1L && (
             <>
               {sizeKeys.length > 1 && (
                 <OptionGroup label="Sizes">
@@ -381,7 +437,7 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
                 </OptionGroup>
               )}
 
-              {product.allowedEspresso?.length > 0 && (
+              {showEspresso && (
                 <OptionGroup label="Espresso Shot">
                   {product.allowedEspresso.map((key) => {
                     const surcharge = ESPRESSO_SURCHARGE[key] ?? 0;
@@ -401,7 +457,7 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
                 </OptionGroup>
               )}
 
-              {product.allowedDairy?.length > 0 && (
+              {showDairy && (
                 <OptionGroup label="Dairy">
                   {product.allowedDairy.map((key) => {
                     const surcharge = DAIRY_SURCHARGE[key] ?? 0;
@@ -421,9 +477,9 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
                 </OptionGroup>
               )}
 
-              {product.allowedSweet?.length > 0 && (
+              {sweetOptions.length > 0 && (
                 <OptionGroup label="Sweet Level">
-                  {product.allowedSweet.map((key) => (
+                  {sweetOptions.map((key) => (
                     <OptionPill
                       key={key}
                       active={sweetness === key}
