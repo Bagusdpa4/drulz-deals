@@ -43,7 +43,7 @@ const KopkenContent = () => {
         Password WiFi — {todayFormatted}
       </p>
       <div className="mt-1.5 flex items-center justify-between gap-3">
-        <p className="text-lg font-extrabold text-neutral-900">
+        <p className="text-base font-bold text-neutral-900">
           {kopkenPassword ?? "Belum tersedia"}
         </p>
         {kopkenPassword && <CopyButton value={kopkenPassword} />}
