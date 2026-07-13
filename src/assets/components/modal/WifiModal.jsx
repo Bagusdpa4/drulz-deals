@@ -7,6 +7,7 @@ import {
   getTodayWifiPassword,
   getTodayFormatted,
 } from "../../../helper/wifi";
+import { useBodyScrollLock } from "../../lib/useBodyScrollLock";
 
 const CopyButton = ({ value }) => {
   const [copied, setCopied] = useState(false);
@@ -88,13 +89,21 @@ const ForeContent = () => (
 const BRAND_LABELS = { kopken: "Kopi Kenangan", fore: "Fore Coffee" };
 
 export const WifiPasswordModal = ({ open, onClose, brand = null }) => {
+  useBodyScrollLock(open);
+
   if (!open) return null;
   const showKopken = brand === "kopken" || brand === null;
   const showFore = brand === "fore" || brand === null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/60 p-0 backdrop-blur-sm sm:p-4">
-      <div className="relative flex w-full max-w-[85vw] flex-col overflow-hidden rounded-3xl bg-white sm:max-w-lg sm:rounded-3xl">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/60 p-0 backdrop-blur-sm sm:p-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative flex w-full max-w-[85vw] flex-col overflow-hidden rounded-3xl bg-white sm:max-w-lg sm:rounded-3xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
           <div className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900 text-white">
