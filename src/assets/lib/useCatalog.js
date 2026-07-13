@@ -19,8 +19,11 @@ export const getAvailableModes = (brandId) => {
   return { hasSatuan, hasBundling };
 };
 
-export const getSatuanCategories = (brandId) => {
-  const sections = getFlattenedSatuanProducts(brandId);
+// UBAH: terima query opsional, dipakai untuk menyesuaikan filter menu
+export const getSatuanCategories = (brandId, query) => {
+  const sections = query
+    ? searchFlattenedSatuanProducts(brandId, query)
+    : getFlattenedSatuanProducts(brandId);
   return sections.map((s) => ({ id: s.groupKey, label: s.groupLabel }));
 };
 
@@ -56,6 +59,28 @@ export const getFlattenedSatuanProducts = (brandId) => {
     }
   }
   return sections;
+};
+
+// filter produk satuan berdasarkan nama, per brand yang aktif
+export const searchFlattenedSatuanProducts = (brandId, query) => {
+  const sections = getFlattenedSatuanProducts(brandId);
+  const q = query?.trim().toLowerCase();
+  if (!q) return sections;
+
+  return sections
+    .map((s) => ({
+      ...s,
+      items: s.items.filter((item) => item.name.toLowerCase().includes(q)),
+    }))
+    .filter((s) => s.items.length > 0);
+};
+
+// filter bundling berdasarkan nama
+export const searchBundlingProducts = (brandId, query) => {
+  const bundles = getBundlingProducts(brandId);
+  const q = query?.trim().toLowerCase();
+  if (!q) return bundles;
+  return bundles.filter((b) => b.name.toLowerCase().includes(q));
 };
 
 export const formatRupiah = (value) =>

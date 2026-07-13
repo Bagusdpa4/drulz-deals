@@ -4,7 +4,11 @@ import { WifiPasswordModal } from "../modal/WifiModal";
 
 const WIFI_BRAND_IDS = ["kopken", "fore"];
 
-export const SearchMenu = ({ selectedBrandId }) => {
+export const SearchMenu = ({
+  selectedBrandId,
+  searchQuery,
+  onSearchChange,
+}) => {
   const [showWifi, setShowWifi] = useState(false);
   const hasWifi = WIFI_BRAND_IDS.includes(selectedBrandId);
 
@@ -14,15 +18,20 @@ export const SearchMenu = ({ selectedBrandId }) => {
         <Search size={20} className="shrink-0 text-neutral-400" />
         <input
           type="text"
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Cari menu favorit kamu..."
           className="w-full bg-transparent text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
         />
-        <button
-          type="button"
-          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-900 text-white transition-colors hover:bg-neutral-700"
-        >
-          <X size={16} />
-        </button>
+        {searchQuery && (
+          <button
+            type="button"
+            onClick={() => onSearchChange("")}
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-900 text-white transition-colors hover:bg-neutral-700"
+          >
+            <X size={16} />
+          </button>
+        )}
       </div>
 
       <button

@@ -6,8 +6,9 @@ export const FilterMenu = ({
   selectedBrandId,
   activeFilter,
   onChangeFilter,
+  searchQuery,
 }) => {
-  const categories = getSatuanCategories(selectedBrandId);
+  const categories = getSatuanCategories(selectedBrandId, searchQuery);
   if (categories.length === 0) return null;
 
   const filters = [{ id: "all", label: "Semua" }, ...categories];

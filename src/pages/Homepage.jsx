@@ -12,6 +12,7 @@ import { ProductList } from "./product/ProductList";
 import { ScrollToTopButton } from "../assets/components/layout/ScrollToTopButton";
 import { FloatingCartButton } from "../assets/components/layout/FloatingCartButton";
 import { Footer } from "../assets/components/layout/Footer";
+import { ConfirmDialog } from "../assets/components/ui/ConfirmDialog";
 
 export const Homepage = () => {
   const productListRef = useRef(null);
@@ -19,20 +20,50 @@ export const Homepage = () => {
   const [mode, setMode] = useState("satuan");
   const [cart, setCart] = useState([]);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState(""); // BARU
+  const [pendingBrandId, setPendingBrandId] = useState(null);
 
-  const handleSelectBrand = (brandId) => {
+  const applyBrandChange = (brandId) => {
     setSelectedBrandId(brandId);
     setMode("satuan");
     setActiveFilter("all");
+    setSearchQuery(""); // BARU: reset search saat ganti brand
   };
+
+  const handleSelectBrand = (brandId) => {
+    if (brandId === selectedBrandId) return;
+    const cartHasOtherBrand = cart.some((item) => item.brandId !== brandId);
+    if (cart.length > 0 && cartHasOtherBrand) {
+      setPendingBrandId(brandId);
+      return;
+    }
+    applyBrandChange(brandId);
+  };
+
+  const confirmBrandChange = () => {
+    setCart([]);
+    applyBrandChange(pendingBrandId);
+    setPendingBrandId(null);
+  };
+
+  const cancelBrandChange = () => setPendingBrandId(null);
 
   const handleChangeMode = (newMode) => {
     setMode(newMode);
     setActiveFilter("all");
   };
 
+  // BARU: saat user mengetik pencarian, reset filter kategori ke "Semua"
+  const handleSearchChange = (query) => {
+    setSearchQuery(query);
+    setActiveFilter("all");
+  };
+
   const handleAddToCart = (item) => {
-    setCart((prev) => [...prev, { ...item, qty: 1 }]);
+    setCart((prev) => [
+      ...prev,
+      { ...item, qty: item.qty ?? 1, brandId: selectedBrandId },
+    ]);
   };
 
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -49,9 +80,35 @@ export const Homepage = () => {
     });
   };
 
-  const handleOpenCart = () => {
-    // TODO: buka drawer/modal keranjang
-    console.log("Open cart:", cart);
+  const handleUpdateQty = (index, newQty) => {
+    setCart((prev) =>
+      prev.map((item, i) =>
+        i === index
+          ? {
+              ...item,
+              qty: newQty,
+              finalPrice: (item.unitPrice ?? 0) * newQty,
+            }
+          : item,
+      ),
+    );
+  };
+
+  const handleEditCartItem = (index, updatedItem) => {
+    setCart((prev) =>
+      prev.map((item, i) =>
+        i === index ? { ...updatedItem, brandId: item.brandId } : item,
+      ),
+    );
+  };
+
+  const handleRemoveItem = (index) => {
+    setCart((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleCheckout = (formData) => {
+    console.log("Checkout:", { cart, ...formData });
+    setCart([]);
   };
 
   return (
@@ -66,7 +123,11 @@ export const Homepage = () => {
           onChangeMode={handleChangeMode}
         />
         <div className="mb-4 mt-6 sm:mt-8">
-          <SearchMenu selectedBrandId={selectedBrandId} />
+          <SearchMenu
+            selectedBrandId={selectedBrandId}
+            searchQuery={searchQuery}
+            onSearchChange={handleSearchChange}
+          />
         </div>
         {mode === "satuan" && (
           <div className="sticky top-0 z-30 -mx-4 bg-slate-100/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
@@ -74,6 +135,7 @@ export const Homepage = () => {
               selectedBrandId={selectedBrandId}
               activeFilter={activeFilter}
               onChangeFilter={handleChangeFilter}
+              searchQuery={searchQuery}
             />
           </div>
         )}
@@ -82,6 +144,7 @@ export const Homepage = () => {
             selectedBrandId={selectedBrandId}
             mode={mode}
             activeFilter={activeFilter}
+            searchQuery={searchQuery}
             onAddToCart={handleAddToCart}
           />
         </div>
@@ -89,9 +152,18 @@ export const Homepage = () => {
       </div>
       <ScrollToTopButton />
       <FloatingCartButton
-        itemCount={totalItems}
-        totalPrice={totalPrice}
-        onClick={handleOpenCart}
+        items={cart}
+        onUpdateQty={handleUpdateQty}
+        onRemoveItem={handleRemoveItem}
+        onEditCartItem={handleEditCartItem}
+        onCheckout={handleCheckout}
+      />
+      <ConfirmDialog
+        open={!!pendingBrandId}
+        title="Ganti Brand?"
+        message="Keranjang kamu masih ada item dari brand lain. Ganti brand akan mengosongkan keranjang."
+        onConfirm={confirmBrandChange}
+        onCancel={cancelBrandChange}
       />
     </div>
   );

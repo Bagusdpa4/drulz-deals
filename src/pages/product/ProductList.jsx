@@ -4,6 +4,8 @@ import { BundlingCard } from "./BundlingCard";
 import {
   getBundlingProducts,
   getFlattenedSatuanProducts,
+  searchBundlingProducts,
+  searchFlattenedSatuanProducts,
 } from "../../assets/lib/useCatalog";
 import { BundlingOptionModal } from "../../assets/components/modal/BundlingOptionModal";
 
@@ -11,6 +13,7 @@ export const ProductList = ({
   selectedBrandId,
   mode,
   activeFilter = "all",
+  searchQuery = "",
   onAddToCart,
 }) => {
   const [activeBundle, setActiveBundle] = useState(null);
@@ -18,11 +21,16 @@ export const ProductList = ({
   if (!selectedBrandId) return null;
 
   if (mode === "bundling") {
-    const bundles = getBundlingProducts(selectedBrandId);
+    const bundles = searchQuery
+      ? searchBundlingProducts(selectedBrandId, searchQuery)
+      : getBundlingProducts(selectedBrandId);
+
     if (bundles.length === 0) {
       return (
-        <p className="mt-8 text-center text-sm text-neutral-400">
-          Belum ada paket bundling untuk brand ini.
+        <p className="mt-10 mb-8 text-center text-sm text-neutral-400">
+          {searchQuery
+            ? `Paket bundling "${searchQuery}" tidak ditemukan.`
+            : "Belum ada paket bundling untuk brand ini."}
         </p>
       );
     }
@@ -33,7 +41,7 @@ export const ProductList = ({
             <BundlingCard
               key={bundle.id}
               bundle={bundle}
-              onSelect={setActiveBundle} // + UBAH: buka modal, bukan langsung add
+              onSelect={setActiveBundle}
             />
           ))}
         </div>
@@ -48,7 +56,10 @@ export const ProductList = ({
     );
   }
 
-  const allSections = getFlattenedSatuanProducts(selectedBrandId);
+  const allSections = searchQuery
+    ? searchFlattenedSatuanProducts(selectedBrandId, searchQuery)
+    : getFlattenedSatuanProducts(selectedBrandId);
+
   const sections =
     activeFilter === "all"
       ? allSections
@@ -56,8 +67,10 @@ export const ProductList = ({
 
   if (sections.length === 0) {
     return (
-      <p className="mt-8 text-center text-sm text-neutral-400">
-        Belum ada produk untuk brand ini.
+      <p className="text-center mb-8 text-sm text-neutral-400">
+        {searchQuery
+          ? `Menu "${searchQuery}" tidak ditemukan.`
+          : "Belum ada produk untuk brand ini."}
       </p>
     );
   }

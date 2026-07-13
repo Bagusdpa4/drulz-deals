@@ -106,7 +106,13 @@ const OptionPill = ({ active, onClick, children, extra }) => (
   </button>
 );
 
-export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
+export const ProductOptionModal = ({
+  open,
+  onClose,
+  product,
+  editItem,
+  onAdd,
+}) => {
   const isDrink = isDrinkProduct(product);
   const isForeveryone1L = isForeveryone1LProduct(product);
 
@@ -139,16 +145,38 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
 
   const [ice, setIce] = useState("normal_ice");
   const [sugar, setSugar] = useState("normal_sugar");
-  const [espresso, setEspresso] = useState(
-    !isForeveryone1L ? (product?.allowedEspresso?.[0] ?? null) : null,
-  );
-  const [dairy, setDairy] = useState(
-    !isForeveryone1L ? (product?.allowedDairy?.[0] ?? null) : null,
-  );
-  const [sweetness, setSweetness] = useState(sweetOptions[0] ?? null);
+  const [espresso, setEspresso] = useState(null);
+  const [dairy, setDairy] = useState(null);
+  const [sweetness, setSweetness] = useState(null);
   const [toppings, setToppings] = useState([]);
   const [qty, setQty] = useState(1);
   const [notes, setNotes] = useState("");
+
+  React.useEffect(() => {
+    if (!open || !product) return;
+
+    setSelectedSize(editItem?.selectedSize ?? sizeKeys[0] ?? null);
+    setTemp(
+      editItem?.temperature ?? (forcedIced ? "ice" : forcedHot ? "hot" : "ice"),
+    );
+    setIce(editItem?.ice ?? "normal_ice");
+    setSugar(editItem?.sugar ?? "normal_sugar");
+    setEspresso(
+      !isForeveryone1L
+        ? (editItem?.espresso ?? product?.allowedEspresso?.[0] ?? null)
+        : null,
+    );
+    setDairy(
+      !isForeveryone1L
+        ? (editItem?.dairy ?? product?.allowedDairy?.[0] ?? null)
+        : null,
+    );
+    setSweetness(editItem?.sweetness ?? sweetOptions[0] ?? null);
+    setToppings(editItem?.toppings ?? []);
+    setQty(editItem?.qty ?? 1);
+    setNotes(editItem?.notes ?? "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, product, editItem]);
 
   const activePrice = useMemo(() => {
     if (!product) return { price: 0, discPrice: 0 };
@@ -188,6 +216,7 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
   const handleAdd = () => {
     onAdd?.({
       ...product,
+      sourceProduct: product,
       selectedSize,
       temperature: isDrink && !isForeveryone1L ? effectiveTemp : null,
       ice: showIceLevel ? ice : null,
@@ -587,7 +616,7 @@ export const ProductOptionModal = ({ open, onClose, product, onAdd }) => {
             onClick={handleAdd}
             className="flex flex-1 cursor-pointer items-center justify-between rounded-full bg-neutral-900 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-orange-500"
           >
-            <span>Tambah ke Keranjang</span>
+            <span>{editItem ? "Simpan Perubahan" : "Tambah ke Keranjang"}</span>
             <span>{formatRupiah(totalPrice)}</span>
           </button>
         </div>
