@@ -111,7 +111,7 @@
             "bundling": [
               {
                 "id": "kpk-b-001",
-                "name": "3 Kopken Regular 35K",
+                "name": "3 menu reguler only 35k",
                 "price": 35000,
                 "description": "Bebas pilih 3 minuman ukuran Regular",
                 "image": "/bundling kopken/3 Kopken Reguler.PNG",
@@ -185,34 +185,6 @@
               },
               {
                 "id": "kpk-b-004",
-                "name": "Bundling Berry Series 40K",
-                "price": 40000,
-                "description": "Bebas pilih 2 menu Berry Series + 1 menu makanan",
-                "image": "/bundling kopken/Berry Series.JPG",
-                "chooseGroups": [
-                  {
-                    "label": "Pilih 2 menu Berry Series (Regular)",
-                    "chooseCount": 2,
-                    "options": [
-                      { "id": "kpk-blueberry-americano-b",  "name": "Blueberry Americano (R)",  "image": "/product/minuman/kopken/Blueberry Americano.png" },
-                      { "id": "kpk-blueberry-frappe-b",     "name": "Blueberry Frappe (R)",     "image": "/product/minuman/kopken/Blueberry Frappe.png" },
-                      { "id": "kpk-og-thai-tea-b",          "name": "OG Thai Tea (R)",          "image": "/product/minuman/kopken/OG Thai Tea.png" },
-                      { "id": "kpk-chocoberry-frappe-b",    "name": "Chocoberry Frappe (R)",    "image": "/product/minuman/kopken/Chocoberry Frappe.png" },
-                      { "id": "kpk-coffeeberry-frappe-b",   "name": "Coffeeberry Frappe (R)",   "image": "/product/minuman/kopken/Coffeeberry Frappe.png" }
-                    ]
-                  },
-                  {
-                    "label": "Pilih 1 menu Makanan",
-                    "chooseCount": 1,
-                    "options": [
-                      { "id": "kpk-salt-bread-choco-butter", "name": "Salt Bread Choco Butter", "image": "/product/makanan/kopken/Salt Bread Choco Butter.png" },
-                      { "id": "kpk-salt-bread-sausage",      "name": "Salt Bread Sausage",      "image": "/product/makanan/kopken/Salt Bread Sausage.png" }
-                    ]
-                  }
-                ]
-              },
-              {
-                "id": "kpk-b-005",
                 "name": "Trio Reguler 45K",
                 "price": 45000,
                 "description": "Bebas pilih 3 minuman ukuran Regular",
