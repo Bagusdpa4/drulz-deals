@@ -13,6 +13,7 @@ import {
   HiTicket,
   HiArrowRight,
   HiMiniShoppingBag,
+  HiBookOpen,
 } from "react-icons/hi2";
 import { useBodyScrollLock } from "../../lib/useBodyScrollLock";
 
@@ -46,7 +47,7 @@ const STEPS = [
     number: 5,
     icon: HiAdjustmentsHorizontal,
     title: "Pilih Opsi",
-    description: "Pilih size, level sugar, & level ice.",
+    description: "Pilih ukuran, level manis, & level ice.",
   },
   {
     number: 6,
@@ -56,24 +57,30 @@ const STEPS = [
   },
   {
     number: 7,
+    icon: HiBookOpen,
+    title: "Isi Biodata",
+    description: "Isi nama anda, outlet tujuan, & jam pengambilan.",
+  },
+  {
+    number: 8,
     icon: HiPaperAirplane,
     title: "Pesan Sekarang",
     description: "Klik pesan sekarang untuk buat pesanan.",
   },
   {
-    number: 8,
+    number: 9,
     icon: HiChatBubbleLeftRight,
     title: "Konfirmasi dari Admin",
     description: "Admin akan konfirmasi ketersediaan menu melalui WhatsApp.",
   },
   {
-    number: 9,
+    number: 10,
     icon: HiQrCode,
     title: "Bayar Pakai QRIS",
     description: "Bayar pesanan pakai QRIS.",
   },
   {
-    number: 10,
+    number: 11,
     icon: HiTicket,
     title: "Dapat Nomor Antrian & Ambil di Outlet",
     description:
