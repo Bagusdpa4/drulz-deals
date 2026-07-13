@@ -11,7 +11,7 @@ export const FloatingCartButton = ({
     <button
       type="button"
       onClick={onClick}
-      className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 rounded-full bg-neutral-900 py-3 pl-4 pr-5 text-white shadow-lg transition-transform hover:scale-105 hover:bg-neutral-700"
+      className="fixed bottom-6 right-6 z-40 flex cursor-pointer items-center gap-2.5 rounded-full bg-neutral-900 py-3 pl-4 pr-5 text-white shadow-lg transition-transform hover:scale-105 hover:bg-neutral-700"
     >
       <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-orange-500">
         <ShoppingCart size={16} />

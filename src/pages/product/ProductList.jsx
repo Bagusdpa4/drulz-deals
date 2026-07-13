@@ -24,7 +24,7 @@ export const ProductList = ({
       );
     }
     return (
-      <section className="mt-6">
+      <section className="mt-6 mb-6">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {bundles.map((bundle) => (
             <BundlingCard
@@ -56,7 +56,7 @@ export const ProductList = ({
     <div className="mt-6 space-y-8 pb-6">
       {sections.map((section) => (
         <section key={section.groupKey}>
-          <h2 className="mb-3 text-md font-bold uppercase text-neutral-900 ">
+          <h2 className="text-md mb-3 font-bold uppercase text-neutral-900">
             {section.groupLabel}
           </h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">

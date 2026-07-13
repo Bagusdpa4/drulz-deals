@@ -113,7 +113,7 @@
                 "id": "kpk-b-001",
                 "name": "3 Kopken Regular 35K",
                 "price": 35000,
-                "description": "Bebas pilih 3 minuman ukuran regular",
+                "description": "Bebas pilih 3 minuman ukuran Regular",
                 "image": "/bundling kopken/3 Kopken Reguler.PNG",
                 "chooseGroups": [
                   {
@@ -327,7 +327,7 @@
                 "price": null,
                 "type": "duo_pay_highest",
                 "chooseCount": 2,
-                "description": "Pilih 2 menu small, bayar harga tertinggi saja",
+                "description": "Pilih 2 menu small, bayar harga tertinggi",
                 "image": "/product/minuman/tomoro/Bundling.PNG",
                 "chooseGroups": [
                   {
