@@ -19,7 +19,10 @@ export const BundlingCard = ({ bundle, onSelect }) => {
   }
 
   return (
-    <div className="hover:scale-102 flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-neutral-400 bg-slate-100/70 shadow-lg transition-shadow hover:shadow-xl">
+    <div
+      className="hover:scale-102 flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-neutral-400 bg-slate-100/70 shadow-lg transition-shadow hover:shadow-xl"
+      onClick={() => onSelect?.(bundle)}
+    >
       <div className="aspect-4/3 relative w-full bg-white">
         <img
           src={bundle.image}
@@ -65,7 +68,6 @@ export const BundlingCard = ({ bundle, onSelect }) => {
           </div>
           <button
             type="button"
-            onClick={() => onSelect?.(bundle)}
             className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-900 text-white transition-colors hover:bg-orange-500"
           >
             <Plus size={16} />

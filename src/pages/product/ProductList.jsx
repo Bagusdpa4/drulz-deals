@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProductCard } from "./ProductCard";
 import { BundlingCard } from "./BundlingCard";
 import {
   getBundlingProducts,
   getFlattenedSatuanProducts,
 } from "../../assets/lib/useCatalog";
+import { BundlingOptionModal } from "../../assets/components/modal/BundlingOptionModal";
 
 export const ProductList = ({
   selectedBrandId,
@@ -12,6 +13,8 @@ export const ProductList = ({
   activeFilter = "all",
   onAddToCart,
 }) => {
+  const [activeBundle, setActiveBundle] = useState(null);
+
   if (!selectedBrandId) return null;
 
   if (mode === "bundling") {
@@ -24,16 +27,23 @@ export const ProductList = ({
       );
     }
     return (
-      <section className="mt-6 mb-6">
+      <section className="mb-6 mt-6">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {bundles.map((bundle) => (
             <BundlingCard
               key={bundle.id}
               bundle={bundle}
-              onSelect={onAddToCart}
+              onSelect={setActiveBundle} // + UBAH: buka modal, bukan langsung add
             />
           ))}
         </div>
+
+        <BundlingOptionModal
+          open={!!activeBundle}
+          bundle={activeBundle}
+          onClose={() => setActiveBundle(null)}
+          onAdd={onAddToCart}
+        />
       </section>
     );
   }
