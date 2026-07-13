@@ -13,7 +13,7 @@ export const FilterMenu = ({
   const filters = [{ id: "all", label: "Semua" }, ...categories];
 
   return (
-    <div className="scrollbar-none flex md:justify-center gap-2.5 overflow-x-auto pb-1 px-2 py-2 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+    <div className="scrollbar-none flex gap-2.5 overflow-x-auto px-2 py-2 pb-1 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       {filters.map((filter) => {
         const isActive = activeFilter === filter.id;
         return (
