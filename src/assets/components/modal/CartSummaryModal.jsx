@@ -299,7 +299,7 @@ export const CartSummaryModal = ({
                 type="text"
                 value={outlet}
                 onChange={(e) => setOutlet(e.target.value)}
-                placeholder="Cari outlet..."
+                placeholder="Nama outlet sesuai google maps"
                 className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none"
               />
             </div>
@@ -332,7 +332,7 @@ export const CartSummaryModal = ({
                 value={globalNotes}
                 onChange={(e) => setGlobalNotes(e.target.value)}
                 rows={4}
-                placeholder="Contoh: sedotan dipisah, dll"
+                placeholder="Contoh: semua minuman less sugar, dll"
                 className="w-full resize-none rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none"
               />
             </div>
@@ -369,9 +369,9 @@ export const CartSummaryModal = ({
                     outlet,
                     pickupTime,
                     globalNotes,
-                    useKantong, // BARU
-                    kantongFee, // BARU
-                    totalPrice, // BARU: total sudah termasuk kantong
+                    useKantong, 
+                    kantongFee, 
+                    totalPrice, 
                   })
                 }
                 disabled={!isFormValid}

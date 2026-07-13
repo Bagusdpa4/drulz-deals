@@ -64,8 +64,8 @@ const STEPS = [
   {
     number: 8,
     icon: HiPaperAirplane,
-    title: "Pesan Sekarang",
-    description: "Klik pesan sekarang untuk buat pesanan.",
+    title: "Klik Checkout Via WhatsApp",
+    description: "Klik pesan sekarang untuk buat pesanan ke WhatsApp admin.",
   },
   {
     number: 9,

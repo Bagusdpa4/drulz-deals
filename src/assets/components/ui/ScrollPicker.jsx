@@ -33,7 +33,7 @@ export const ScrollPicker = ({
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-stone-900 outline-none focus:border-orange-300 focus:bg-white"
+        className="flex w-full items-center justify-between rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-stone-900 outline-none focus:border-neutral-500 focus:bg-white"
       >
         <span className={value ? "text-stone-900" : "text-stone-400"}>
           {displayValue}
@@ -50,7 +50,7 @@ export const ScrollPicker = ({
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-lg">
             <div className="bg-linear-to-b pointer-events-none absolute inset-x-0 top-0 z-10 h-6 from-white to-transparent" />
-            <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 h-8 -translate-y-1/2 border-y border-orange-200 bg-orange-50/60" />
+            <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 h-8 -translate-y-1/2 border-y border-neutral-400 bg-neutral-100/70" />
             <div className="bg-linear-to-t pointer-events-none absolute inset-x-0 bottom-0 z-10 h-6 from-white to-transparent" />
             <div
               className="h-50 overflow-y-auto py-4"
@@ -66,7 +66,7 @@ export const ScrollPicker = ({
                     className={`cursor-pointer py-1.5 text-center text-sm transition-colors ${
                       isActive
                         ? "font-bold text-orange-600"
-                        : "text-stone-500 hover:text-stone-900"
+                        : "text-stone-900 hover:bg-slate-100 hover:text-stone-900"
                     }`}
                   >
                     {opt}
