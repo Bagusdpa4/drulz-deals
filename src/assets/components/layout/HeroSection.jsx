@@ -46,7 +46,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Right: image */}
-          <div className="w-full max-w-[280px] shrink-0 sm:max-w-xs lg:w-auto lg:max-w-sm">
+          <div className="max-w-70 w-full shrink-0 sm:max-w-xs lg:w-auto lg:max-w-sm">
             <img
               src="/hero.PNG"
               alt="Promo Drulz Deals"
