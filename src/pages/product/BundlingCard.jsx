@@ -23,7 +23,7 @@ export const BundlingCard = ({ bundle, onSelect }) => {
       className="hover:scale-102 flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-neutral-400 bg-slate-100/70 shadow-lg transition-shadow hover:shadow-xl"
       onClick={() => onSelect?.(bundle)}
     >
-      <div className="aspect-4/3 relative w-full bg-white">
+      <div className="relative aspect-square w-full bg-white">
         <img
           src={bundle.image}
           alt={bundle.name}
