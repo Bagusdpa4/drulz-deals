@@ -36,55 +36,55 @@ const STEPS = [
     title: "Pilih Paket",
     description: "Pilih paket satuan atau promo bundling.",
   },
+  // {
+  //   number: 4,
+  //   icon: HiShoppingBag,
+  //   title: "Pilih Minuman / Makanan Favoritmu",
+  //   description:
+  //     "Isi nama customer, nama outlet untuk diambil, dan jam pengambilan.",
+  // },
   {
     number: 4,
-    icon: HiShoppingBag,
-    title: "Pilih Minuman / Makanan Favoritmu",
-    description:
-      "Isi nama customer, nama outlet untuk diambil, dan jam pengambilan.",
+    icon: HiAdjustmentsHorizontal,
+    title: "Pilih Opsi",
+    description: "Pilih menu, ukuran, level sugar, & level ice.",
   },
   {
     number: 5,
-    icon: HiAdjustmentsHorizontal,
-    title: "Pilih Opsi",
-    description: "Pilih ukuran, level manis, & level ice.",
-  },
-  {
-    number: 6,
     icon: HiShoppingCart,
     title: "Cek Keranjang",
     description: "Cek menu yang kamu pilih di keranjang (pojok kanan bawah).",
   },
   {
-    number: 7,
+    number: 6,
     icon: HiBookOpen,
     title: "Isi Biodata",
-    description: "Isi nama anda, outlet tujuan, & jam pengambilan.",
+    description: "Isi nama mu, outlet tujuan, & jam pengambilan.",
+  },
+  {
+    number: 7,
+    icon: HiPaperAirplane,
+    title: "Klik Checkout",
+    description: "Klik checkout untuk buat pesanan ke WhatsApp admin.",
   },
   {
     number: 8,
-    icon: HiPaperAirplane,
-    title: "Klik Checkout Via WhatsApp",
-    description: "Klik pesan sekarang untuk buat pesanan ke WhatsApp admin.",
-  },
-  {
-    number: 9,
     icon: HiChatBubbleLeftRight,
     title: "Konfirmasi dari Admin",
     description: "Admin akan konfirmasi ketersediaan menu melalui WhatsApp.",
   },
   {
-    number: 10,
+    number: 9,
     icon: HiQrCode,
     title: "Bayar Pakai QRIS",
     description: "Bayar pesanan pakai QRIS.",
   },
   {
-    number: 11,
+    number: 10,
     icon: HiTicket,
-    title: "Dapat Nomor Antrian & Ambil di Outlet",
+    title: "Dapatkan Kode & Ambil di Outlet",
     description:
-      "Dapat nomor antrian & nama untuk ambil di outlet yang kamu pilih.",
+      "Setelah bayar akan dapat kode untuk ambil pesananmu dioutlet yang kamu pilih.",
   },
 ];
 

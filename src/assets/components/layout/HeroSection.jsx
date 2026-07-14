@@ -61,7 +61,7 @@ export const HeroSection = () => {
         onClose={() => setShowGuide(false)}
         onOrderNow={() => {
           setShowGuide(false);
-          navigate("/minuman");
+          navigate("/");
         }}
       />
     </section>
