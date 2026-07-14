@@ -11,7 +11,13 @@ const emptyGroupSelections = (bundle) =>
 const countPicked = (selectionMap) =>
   Object.values(selectionMap ?? {}).reduce((sum, q) => sum + q, 0);
 
-export const BundlingOptionModal = ({ open, onClose, bundle, onAdd }) => {
+export const BundlingOptionModal = ({
+  open,
+  onClose,
+  bundle,
+  editItem,
+  onAdd,
+}) => {
   useBodyScrollLock(open);
 
   const isFixedChoice = bundle?.type === "fixed_choice";
@@ -26,13 +32,34 @@ export const BundlingOptionModal = ({ open, onClose, bundle, onAdd }) => {
   const [qty, setQty] = useState(1);
   const [notes, setNotes] = useState("");
 
-  // Reset semua pilihan setiap kali bundle yang dibuka berganti
   useEffect(() => {
-    setGroupSelections(emptyGroupSelections(bundle));
-    setFixedOptionId(bundle?.fixedOptions?.[0]?.id ?? null);
-    setQty(1);
-    setNotes("");
-  }, [bundle?.id]);
+    if (!open || !bundle) return;
+
+    setFixedOptionId(
+      editItem?.selectedFixedOption?.id ??
+        bundle?.fixedOptions?.[0]?.id ??
+        null,
+    );
+    setQty(editItem?.qty ?? 1);
+    setNotes(editItem?.notes ?? "");
+
+    if (editItem?.chosenProducts?.length) {
+      setGroupSelections(
+        groups.map((group) => {
+          const sel = {};
+          editItem.chosenProducts
+            .filter((p) => p.groupLabel === group.label)
+            .forEach((p) => {
+              sel[p.id] = (sel[p.id] ?? 0) + 1;
+            });
+          return sel;
+        }),
+      );
+    } else {
+      setGroupSelections(emptyGroupSelections(bundle));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, bundle?.id, editItem]);
 
   const addToGroup = (groupIndex, option) => {
     const group = groups[groupIndex];
@@ -119,12 +146,14 @@ export const BundlingOptionModal = ({ open, onClose, bundle, onAdd }) => {
     onAdd?.({
       ...bundle,
       isBundling: true,
+      sourceBundle: bundle,
       selectedFixedOption: isFixedChoice
         ? bundle.fixedOptions.find((o) => o.id === fixedOptionId)
         : null,
       chosenProducts,
       qty,
       notes: notes.trim() || null,
+      unitPrice: totalPrice / qty,
       finalPrice: totalPrice,
     });
     onClose();
@@ -197,7 +226,7 @@ export const BundlingOptionModal = ({ open, onClose, bundle, onAdd }) => {
                       className={`flex w-full items-center justify-between rounded-xl border px-3.5 py-3 text-left text-sm transition-colors ${
                         active
                           ? "border-neutral-900 bg-neutral-50"
-                          : "border-slate-200 bg-white hover:border-orange-300"
+                          : "cursor-pointer border-slate-200 bg-white hover:border-orange-300"
                       }`}
                     >
                       <span>
@@ -357,7 +386,11 @@ export const BundlingOptionModal = ({ open, onClose, bundle, onAdd }) => {
             className="flex flex-1 cursor-pointer items-center justify-between rounded-full bg-neutral-900 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-orange-500 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-neutral-900"
           >
             <span>
-              {canSubmit ? "Tambah ke Keranjang" : "Lengkapi pilihan dulu"}
+              {canSubmit
+                ? editItem
+                  ? "Simpan Perubahan"
+                  : "Tambah ke Keranjang"
+                : "Lengkapi pilihan dulu"}
             </span>
             <span>{formatRupiah(totalPrice)}</span>
           </button>

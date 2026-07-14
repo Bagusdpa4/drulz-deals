@@ -213,7 +213,9 @@ export const CartSummaryModal = ({
                         <button
                           type="button"
                           onClick={() =>
-                            onUpdateQty?.(index, Math.max(1, item.qty - 1))
+                            item.qty <= 1
+                              ? onRemoveItem?.(index)
+                              : onUpdateQty?.(index, item.qty - 1)
                           }
                           className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-neutral-700 hover:bg-slate-200"
                         >
@@ -369,9 +371,9 @@ export const CartSummaryModal = ({
                     outlet,
                     pickupTime,
                     globalNotes,
-                    useKantong, 
-                    kantongFee, 
-                    totalPrice, 
+                    useKantong,
+                    kantongFee,
+                    totalPrice,
                   })
                 }
                 disabled={!isFormValid}

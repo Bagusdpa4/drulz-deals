@@ -3,6 +3,7 @@ import { ShoppingCart } from "lucide-react";
 import { formatRupiah } from "../../lib/useCatalog";
 import { CartSummaryModal } from "../modal/CartSummaryModal";
 import { ProductOptionModal } from "../modal/ProductOptionModal";
+import { BundlingOptionModal } from "../modal/BundlingOptionModal";
 
 export const FloatingCartButton = ({
   items = [],
@@ -23,6 +24,7 @@ export const FloatingCartButton = ({
   if (itemCount === 0) return null;
 
   const editingItem = editingIndex !== null ? items[editingIndex] : null;
+  const isEditingBundle = !!editingItem?.isBundling;
 
   return (
     <>
@@ -58,6 +60,17 @@ export const FloatingCartButton = ({
         open={editingIndex !== null}
         onClose={() => setEditingIndex(null)}
         product={editingItem?.sourceProduct ?? editingItem}
+        editItem={editingItem}
+        onAdd={(updatedItem) => {
+          onEditCartItem?.(editingIndex, updatedItem);
+          setEditingIndex(null);
+        }}
+      />
+
+      <BundlingOptionModal
+        open={editingIndex !== null && isEditingBundle}
+        onClose={() => setEditingIndex(null)}
+        bundle={editingItem?.sourceBundle}
         editItem={editingItem}
         onAdd={(updatedItem) => {
           onEditCartItem?.(editingIndex, updatedItem);
