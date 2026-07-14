@@ -18,8 +18,11 @@ import {
   sendWhatsAppOrder,
 } from "../assets/lib/waOrderMessage";
 import { getBrandById } from "../assets/lib/useBrands";
+import { ClosedOverlay } from "../assets/components/layout/ClosedOverlay";
+import { useSiteStatus } from "../assets/lib/useSiteStatus";
 
 export const Homepage = () => {
+  const { isOpen, closedMessage, loaded } = useSiteStatus();
   const productListRef = useRef(null);
   const [selectedBrandId, setSelectedBrandId] = useState(DEFAULT_BRAND_ID);
   const [mode, setMode] = useState("satuan");
@@ -179,6 +182,7 @@ export const Homepage = () => {
         onConfirm={confirmBrandChange}
         onCancel={cancelBrandChange}
       />
+      {loaded && !isOpen && <ClosedOverlay message={closedMessage} />}
     </div>
   );
 };
