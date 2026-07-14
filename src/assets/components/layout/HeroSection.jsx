@@ -35,7 +35,7 @@ export const HeroSection = () => {
                 onClick={() => setShowGuide(true)}
                 className="flex cursor-pointer items-center gap-1.5 rounded-full border bg-neutral-900 px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 sm:gap-2 sm:px-5 sm:py-3"
               >
-                <CheckSquare size={16} />
+                <CheckSquare size={16} className="animate-bounce" />
                 Cara Pemesanan
               </button>
               <button className="flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3">

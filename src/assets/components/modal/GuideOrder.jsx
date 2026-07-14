@@ -158,7 +158,7 @@ export const GuideOrder = ({ open, onClose, onOrderNow }) => {
             className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-neutral-700"
           >
             <HiMiniShoppingBag className="h-4.5 w-4.5" />
-            Klik Order Now
+            Order Now
             <HiArrowRight className="h-4.5 w-4.5" />
           </button>
         </div>

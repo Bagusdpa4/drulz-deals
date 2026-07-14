@@ -379,7 +379,7 @@ export const CartSummaryModal = ({
                 disabled={!isFormValid}
                 className="flex w-full cursor-pointer items-center justify-center rounded-full bg-neutral-900 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-orange-500 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-neutral-900"
               >
-                {isFormValid ? "Checkout via WhatsApp" : "Lengkapi data dulu"}
+                {isFormValid ? "Checkout" : "Lengkapi data dulu"}
               </button>
             )}
           </div>
