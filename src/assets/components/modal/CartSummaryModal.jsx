@@ -22,7 +22,7 @@ import {
 const KANTONG_PRICES = {
   chagee: 2000,
   janjijiwa: 5000,
-  kopken: 5000,
+  kopken: 6000,
 };
 
 const buildVariantSummary = (item) => {
