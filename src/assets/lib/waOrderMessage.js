@@ -103,7 +103,7 @@ export const buildWhatsAppOrderMessage = ({ cart, brandLabel, formData }) => {
         : formatRupiah(finalLineTotal);
 
     lines.push(
-      `[${category}]: ${item.name}${variantText} x${qty} - ${priceText}`,
+      `• [${category}]: ${item.name}${variantText} x${qty} - ${priceText}`,
     );
 
     if (item.notes) {
