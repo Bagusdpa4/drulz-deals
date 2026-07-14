@@ -3,10 +3,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Flame, CheckSquare, MessageSquareQuote } from "lucide-react";
 import { GuideOrder } from "../modal/GuideOrder";
+import { TestimonialModal } from "../modal/TestimonialModal";
+import { getTestimonials } from "../../lib/useTestimonials";
 
 export const HeroSection = () => {
   const [showGuide, setShowGuide] = useState(false);
+  const [showTestimonial, setShowTestimonial] = useState(false);
   const navigate = useNavigate();
+
+  const testimonials = getTestimonials();
 
   return (
     <section className="px-0 pt-4 sm:px-5 sm:pt-6">
@@ -38,7 +43,10 @@ export const HeroSection = () => {
                 <CheckSquare size={16} className="animate-bounce" />
                 Cara Pemesanan
               </button>
-              <button className="flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3">
+              <button
+                onClick={() => setShowTestimonial(true)}
+                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3"
+              >
                 <MessageSquareQuote size={16} />
                 Testimonial
               </button>
@@ -63,6 +71,12 @@ export const HeroSection = () => {
           setShowGuide(false);
           navigate("/");
         }}
+      />
+
+      <TestimonialModal
+        open={showTestimonial}
+        onClose={() => setShowTestimonial(false)}
+        testimonials={testimonials}
       />
     </section>
   );
