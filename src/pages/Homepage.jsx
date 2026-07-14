@@ -17,6 +17,7 @@ import {
   buildWhatsAppOrderMessage,
   sendWhatsAppOrder,
 } from "../assets/lib/waOrderMessage";
+import { getBrandById } from "../assets/lib/useBrands";
 
 export const Homepage = () => {
   const productListRef = useRef(null);
@@ -51,6 +52,10 @@ export const Homepage = () => {
   };
 
   const cancelBrandChange = () => setPendingBrandId(null);
+
+  const currentCartBrandLabel = cart[0]?.brandId
+    ? (getBrandById(cart[0].brandId)?.name ?? cart[0].brandId)
+    : "";
 
   const handleChangeMode = (newMode) => {
     setMode(newMode);
@@ -113,7 +118,7 @@ export const Homepage = () => {
   const handleCheckout = (formData) => {
     const message = buildWhatsAppOrderMessage({
       cart,
-      brandLabel: selectedBrandId,
+      brandLabel: getBrandById(selectedBrandId)?.name ?? selectedBrandId,
       formData,
     });
     sendWhatsAppOrder(message);
@@ -170,7 +175,7 @@ export const Homepage = () => {
       <ConfirmDialog
         open={!!pendingBrandId}
         title="Ganti Brand?"
-        message="Keranjang kamu masih ada item dari brand lain. Ganti brand akan mengosongkan keranjang."
+        message={`Keranjang kamu masih ada item dari brand ${currentCartBrandLabel}. Ganti brand akan mengosongkan keranjang.`}
         onConfirm={confirmBrandChange}
         onCancel={cancelBrandChange}
       />

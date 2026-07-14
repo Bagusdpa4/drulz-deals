@@ -10,7 +10,7 @@ export const ConfirmDialog = ({
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-60 flex items-center justify-center bg-neutral-900/60 p-4 backdrop-blur-sm"
+      className="z-60 fixed inset-0 flex items-center justify-center bg-neutral-900/60 p-4 backdrop-blur-sm"
       onClick={onCancel}
     >
       <div
