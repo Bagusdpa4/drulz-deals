@@ -13,6 +13,10 @@ import { ScrollToTopButton } from "../assets/components/layout/ScrollToTopButton
 import { FloatingCartButton } from "../assets/components/layout/FloatingCartButton";
 import { Footer } from "../assets/components/layout/Footer";
 import { ConfirmDialog } from "../assets/components/ui/ConfirmDialog";
+import {
+  buildWhatsAppOrderMessage,
+  sendWhatsAppOrder,
+} from "../assets/lib/waOrderMessage";
 
 export const Homepage = () => {
   const productListRef = useRef(null);
@@ -107,7 +111,12 @@ export const Homepage = () => {
   };
 
   const handleCheckout = (formData) => {
-    console.log("Checkout:", { cart, ...formData });
+    const message = buildWhatsAppOrderMessage({
+      cart,
+      brandLabel: selectedBrandId,
+      formData,
+    });
+    sendWhatsAppOrder(message);
     setCart([]);
   };
 
