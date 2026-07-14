@@ -99,7 +99,7 @@ export const GuideOrder = ({ open, onClose, onOrderNow }) => {
       onClick={onClose}
     >
       <div
-        className="relative flex max-h-[80vh] w-full max-w-[85vw] flex-col overflow-hidden rounded-3xl bg-white md:max-w-2xl md:rounded-3xl"
+        className="relative flex max-h-[75vh] w-full max-w-[85vw] flex-col overflow-hidden rounded-3xl bg-white md:max-w-2xl md:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

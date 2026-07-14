@@ -36,7 +36,7 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
       onClick={onClose}
     >
       <div
-        className="relative flex max-h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white sm:max-h-[80vh] sm:rounded-3xl"
+        className="relative flex max-h-[75vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white sm:max-h-[80vh] sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -128,13 +128,13 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
           )}
 
           <div
-            className="flex max-h-[85vh] max-w-[90vw] flex-col items-center"
+            className="flex max-h-[75vh] max-w-[70vw] flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={testimonials[activeIndex].image}
               alt={`Testimoni ${activeIndex + 1}`}
-              className="max-h-[80vh] max-w-full rounded-xl object-contain"
+              className="max-h-full max-w-[75vw] rounded-xl object-contain"
             />
             <p className="mt-3 text-xs text-white/40">
               {activeIndex + 1} / {testimonials.length}
