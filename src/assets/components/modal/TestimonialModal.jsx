@@ -134,7 +134,7 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
             <img
               src={testimonials[activeIndex].image}
               alt={`Testimoni ${activeIndex + 1}`}
-              className="max-h-full max-w-[75vw] rounded-xl object-contain"
+              className="max-h-[75vh] max-w-[75vw] rounded-xl object-contain"
             />
             <p className="mt-3 text-xs text-white/40">
               {activeIndex + 1} / {testimonials.length}
