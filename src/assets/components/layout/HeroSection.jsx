@@ -24,9 +24,11 @@ export const HeroSection = () => {
               PROMO SPESIAL
             </span>
 
-            <h1 className="mt-3 text-xl font-extrabold leading-tight text-neutral-900 sm:text-3xl md:text-4xl">
-              Semua Promo, Satu Tempat.{" "}
-              <span className="text-orange-500">
+            <h1 className="mt-3 text-xl font-extrabold leading-tight sm:text-3xl md:text-4xl">
+              <span className="block text-neutral-900">
+                Semua Promo, Satu Tempat.
+              </span>
+              <span className="block text-orange-500">
                 Coffee &bull; Tea &bull; Food &bull; Deals
               </span>
             </h1>
