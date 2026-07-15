@@ -1,14 +1,22 @@
 import React from "react";
 import { LayoutGrid } from "lucide-react";
-import { getSatuanCategories } from "../../lib/useCatalog";
+import { getSatuanCategories, getBrandModeConfig } from "../../lib/useCatalog";
 
 export const FilterMenu = ({
   selectedBrandId,
   activeFilter,
   onChangeFilter,
   searchQuery,
+  mode,
 }) => {
-  const categories = getSatuanCategories(selectedBrandId, searchQuery);
+  const modeConfig = getBrandModeConfig(selectedBrandId);
+  const variantId = modeConfig.type === "variants" ? mode : undefined;
+
+  const categories = getSatuanCategories(
+    selectedBrandId,
+    searchQuery,
+    variantId,
+  );
   if (categories.length === 0) return null;
 
   const filters = [{ id: "all", label: "Semua" }, ...categories];

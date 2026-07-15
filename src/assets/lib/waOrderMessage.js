@@ -16,6 +16,8 @@ const isDrinkItem = (item) =>
 
 const getItemCategory = (item) => {
   if (item.isBundling) return "Bundling";
+  if (item.category === "minuman") return "Minuman";
+  if (item.category === "makanan") return "Makanan";
   return isDrinkItem(item) ? "Minuman" : "Makanan";
 };
 

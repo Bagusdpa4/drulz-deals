@@ -10,25 +10,38 @@ export const getBrandCatalog = (brandId) => {
   return null;
 };
 
-export const getAvailableModes = (brandId) => {
+// BARU: konfigurasi mode brand — bisa "standard" (satuan/bundling) atau "variants" (biasa/culture, dst)
+export const getBrandModeConfig = (brandId) => {
   const brand = getBrandCatalog(brandId);
-  if (!brand) return { hasSatuan: false, hasBundling: false };
-  const hasSatuan = Boolean(brand.modes?.satuan);
-  const hasBundling =
-    Array.isArray(brand.modes?.bundling) && brand.modes.bundling.length > 0;
-  return { hasSatuan, hasBundling };
+  if (!brand) return { type: "none" };
+
+  if (brand.modes?.variants) {
+    const variants = Object.entries(brand.modes.variants).map(([id, v]) => ({
+      id,
+      label: v.label || formatSeriesLabel(id),
+    }));
+    return { type: "variants", variants };
+  }
+
+  return {
+    type: "standard",
+    hasSatuan: Boolean(brand.modes?.satuan),
+    hasBundling:
+      Array.isArray(brand.modes?.bundling) && brand.modes.bundling.length > 0,
+  };
 };
 
-// UBAH: terima query opsional, dipakai untuk menyesuaikan filter menu
-export const getSatuanCategories = (brandId, query) => {
-  const sections = query
-    ? searchFlattenedSatuanProducts(brandId, query)
-    : getFlattenedSatuanProducts(brandId);
-  return sections.map((s) => ({ id: s.groupKey, label: s.groupLabel }));
+// DIUBAH: sekarang terima param `variantId` opsional, dipakai kalau brand tipe "variants"
+export const getSatuanProducts = (brandId, variantId) => {
+  const brand = getBrandCatalog(brandId);
+  if (!brand) return null;
+
+  if (brand.modes?.variants) {
+    return brand.modes.variants[variantId]?.satuan ?? null;
+  }
+  return brand.modes?.satuan ?? null;
 };
 
-export const getSatuanProducts = (brandId) =>
-  getBrandCatalog(brandId)?.modes?.satuan ?? null;
 export const getBundlingProducts = (brandId) =>
   getBrandCatalog(brandId)?.modes?.bundling ?? [];
 
@@ -38,8 +51,9 @@ const formatSeriesLabel = (key) =>
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 
-export const getFlattenedSatuanProducts = (brandId) => {
-  const satuan = getSatuanProducts(brandId);
+// DIUBAH: terima `variantId` opsional
+export const getFlattenedSatuanProducts = (brandId, variantId) => {
+  const satuan = getSatuanProducts(brandId, variantId);
   if (!satuan) return [];
   const sections = [];
   for (const type of ["minuman", "makanan"]) {
@@ -61,9 +75,9 @@ export const getFlattenedSatuanProducts = (brandId) => {
   return sections;
 };
 
-// filter produk satuan berdasarkan nama, per brand yang aktif
-export const searchFlattenedSatuanProducts = (brandId, query) => {
-  const sections = getFlattenedSatuanProducts(brandId);
+// DIUBAH: terima `variantId` opsional, diteruskan ke getFlattenedSatuanProducts
+export const searchFlattenedSatuanProducts = (brandId, query, variantId) => {
+  const sections = getFlattenedSatuanProducts(brandId, variantId);
   const q = query?.trim().toLowerCase();
   if (!q) return sections;
 
@@ -75,12 +89,27 @@ export const searchFlattenedSatuanProducts = (brandId, query) => {
     .filter((s) => s.items.length > 0);
 };
 
-// filter bundling berdasarkan nama
 export const searchBundlingProducts = (brandId, query) => {
   const bundles = getBundlingProducts(brandId);
   const q = query?.trim().toLowerCase();
   if (!q) return bundles;
   return bundles.filter((b) => b.name.toLowerCase().includes(q));
+};
+
+export const getAvailableModes = (brandId) => {
+  const brand = getBrandCatalog(brandId);
+  if (!brand) return { hasSatuan: false, hasBundling: false };
+  const hasSatuan = Boolean(brand.modes?.satuan);
+  const hasBundling =
+    Array.isArray(brand.modes?.bundling) && brand.modes.bundling.length > 0;
+  return { hasSatuan, hasBundling };
+};
+
+export const getSatuanCategories = (brandId, query, variantId) => {
+  const sections = query
+    ? searchFlattenedSatuanProducts(brandId, query, variantId)
+    : getFlattenedSatuanProducts(brandId, variantId);
+  return sections.map((s) => ({ id: s.groupKey, label: s.groupLabel }));
 };
 
 export const formatRupiah = (value) =>

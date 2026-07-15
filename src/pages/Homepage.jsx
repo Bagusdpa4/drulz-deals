@@ -20,12 +20,19 @@ import {
 import { getBrandById } from "../assets/lib/useBrands";
 import { ClosedOverlay } from "../assets/components/layout/ClosedOverlay";
 import { useSiteStatus } from "../assets/lib/useSiteStatus";
+import { getBrandModeConfig } from "../assets/lib/useCatalog";
+
+const getDefaultMode = (brandId) => {
+  const config = getBrandModeConfig(brandId);
+  if (config.type === "variants") return config.variants[0]?.id ?? null;
+  return "satuan";
+};
 
 export const Homepage = () => {
   const { isOpen, closedMessage, loaded } = useSiteStatus();
   const productListRef = useRef(null);
   const [selectedBrandId, setSelectedBrandId] = useState(DEFAULT_BRAND_ID);
-  const [mode, setMode] = useState("satuan");
+  const [mode, setMode] = useState(getDefaultMode(DEFAULT_BRAND_ID));
   const [cart, setCart] = useState([]);
   const [activeFilter, setActiveFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState(""); // BARU
@@ -33,7 +40,7 @@ export const Homepage = () => {
 
   const applyBrandChange = (brandId) => {
     setSelectedBrandId(brandId);
-    setMode("satuan");
+    setMode(getDefaultMode(brandId));
     setActiveFilter("all");
     setSearchQuery(""); // BARU: reset search saat ganti brand
   };
@@ -128,6 +135,11 @@ export const Homepage = () => {
     setCart([]);
   };
 
+  // (mode "satuan" untuk brand standard, ATAU mode apapun selain "bundling" untuk brand variants)
+  const modeConfig = getBrandModeConfig(selectedBrandId);
+  const shouldShowFilterMenu =
+    modeConfig.type === "variants" ? true : mode === "satuan";
+
   return (
     <div className="min-h-screen bg-slate-100 pb-12">
       <Navbar />
@@ -146,13 +158,14 @@ export const Homepage = () => {
             onSearchChange={handleSearchChange}
           />
         </div>
-        {mode === "satuan" && (
+        {shouldShowFilterMenu && (
           <div className="sticky top-0 z-30 -mx-4 bg-slate-100/95 px-4 py-3 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
             <FilterMenu
               selectedBrandId={selectedBrandId}
               activeFilter={activeFilter}
               onChangeFilter={handleChangeFilter}
               searchQuery={searchQuery}
+              mode={mode}
             />
           </div>
         )}

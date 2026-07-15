@@ -217,6 +217,7 @@ export const ProductOptionModal = ({
     onAdd?.({
       ...product,
       sourceProduct: product,
+      category: isDrink ? "minuman" : "makanan",
       selectedSize,
       temperature: isDrink && !isForeveryone1L ? effectiveTemp : null,
       ice: showIceLevel ? ice : null,

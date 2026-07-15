@@ -6,6 +6,7 @@ import {
   getFlattenedSatuanProducts,
   searchBundlingProducts,
   searchFlattenedSatuanProducts,
+  getBrandModeConfig,
 } from "../../assets/lib/useCatalog";
 import { BundlingOptionModal } from "../../assets/components/modal/BundlingOptionModal";
 
@@ -20,14 +21,20 @@ export const ProductList = ({
 
   if (!selectedBrandId) return null;
 
-  if (mode === "bundling") {
+  const modeConfig = getBrandModeConfig(selectedBrandId);
+  const isVariantBrand = modeConfig.type === "variants";
+
+  // untuk brand ber-varian, `mode` di sini = variantId ("biasa" / "culture")
+  const variantId = isVariantBrand ? mode : undefined;
+
+  if (!isVariantBrand && mode === "bundling") {
     const bundles = searchQuery
       ? searchBundlingProducts(selectedBrandId, searchQuery)
       : getBundlingProducts(selectedBrandId);
 
     if (bundles.length === 0) {
       return (
-        <p className="mt-10 mb-8 text-center text-sm text-neutral-400">
+        <p className="mb-8 mt-10 text-center text-sm text-neutral-400">
           {searchQuery
             ? `Paket bundling "${searchQuery}" tidak ditemukan.`
             : "Belum ada paket bundling untuk brand ini."}
@@ -57,8 +64,8 @@ export const ProductList = ({
   }
 
   const allSections = searchQuery
-    ? searchFlattenedSatuanProducts(selectedBrandId, searchQuery)
-    : getFlattenedSatuanProducts(selectedBrandId);
+    ? searchFlattenedSatuanProducts(selectedBrandId, searchQuery, variantId)
+    : getFlattenedSatuanProducts(selectedBrandId, variantId);
 
   const sections =
     activeFilter === "all"
@@ -67,7 +74,7 @@ export const ProductList = ({
 
   if (sections.length === 0) {
     return (
-      <p className="text-center mb-8 text-sm text-neutral-400">
+      <p className="mb-8 text-center text-sm text-neutral-400">
         {searchQuery
           ? `Menu "${searchQuery}" tidak ditemukan.`
           : "Belum ada produk untuk brand ini."}
