@@ -71,12 +71,6 @@
                   { "id": "kpk-oatside-kopi-kenangan-mantan",  "name": "Oatside Kopi Kenangan Mantan",      "image": "/product/minuman/kopken/Oatside Kopi Kenangan Mantan.jpg",    "sizes": { "R": { "price": 22000, "discPrice": 16000 }, "L": { "price": 28000, "discPrice": 19000 } } },
                   { "id": "kpk-oatside-latte",                 "name": "Oatside Latte",                     "image": "/product/minuman/kopken/Oatside Lattee.png",                  "sizes": { "R": { "price": 25000, "discPrice": 17500 }, "L": { "price": 32000, "discPrice": 21000 } } },
                   { "id": "kpk-oatside-matcha-latte",          "name": "Oatside Matcha Latte",              "image": "/product/minuman/kopken/Oatside Matcha Latte.PNG",            "sizes": { "R": { "price": 25000, "discPrice": 17500 }, "L": { "price": 32000, "discPrice": 21000 } } }
-                ],
-                "berry_series": [
-                  { "id": "kpk-blueberry-americano",           "name": "Blueberry Americano",               "image": "/product/minuman/kopken/Blueberry Americano.png",              "sizes": { "R": { "price": 19000, "discPrice": 14500 }, "L": { "price": 26000, "discPrice": 18000 } } },
-                  { "id": "kpk-blueberry-frappe",              "name": "Blueberry Frappe",                  "image": "/product/minuman/kopken/Blueberry Frappe.png",                 "sizes": { "R": { "price": 23000, "discPrice": 16500 }, "L": { "price": 30000, "discPrice": 20000 } } },
-                  { "id": "kpk-chocoberry-frappe",             "name": "Chocoberry Frappe",                 "image": "/product/minuman/kopken/Chocoberry Frappe.png",                "sizes": { "R": { "price": 27000, "discPrice": 18500 }, "L": { "price": 34000, "discPrice": 22000 } } },
-                  { "id": "kpk-coffeeberry-frappe",            "name": "Coffeeberry Frappe",                "image": "/product/minuman/kopken/Coffeeberry Frappe.png",               "sizes": { "R": { "price": 25000, "discPrice": 17500 }, "L": { "price": 32000, "discPrice": 21000 } } }
                 ]
               },
               "makanan": {
@@ -120,7 +114,6 @@
                     "label": "Pilih 3 menu regular",
                     "chooseCount": 3,
                     "options": [
-                      { "id": "kpk-blueberry-americano-b",        "name": "Blueberry Americano (R)",        "image": "/product/minuman/kopken/Blueberry Americano.png" },
                       { "id": "kpk-kopi-kenangan-mantan-b",       "name": "Kopi Kenangan Mantan (R)",       "image": "/product/minuman/kopken/Kopi Kenangan Mantan.png" },
                       { "id": "kpk-og-thai-tea-b",                "name": "OG Thai Tea (R)",                "image": "/product/minuman/kopken/OG Thai Tea.png" },
                       { "id": "kpk-spanish-latte-b",              "name": "Spanish Latte (R)",              "image": "/product/minuman/kopken/Spanish Latte.png" },
@@ -158,8 +151,6 @@
                     "label": "Pilih 2 menu Large",
                     "chooseCount": 2,
                     "options": [
-                      { "id": "kpk-blueberry-americano-l",          "name": "Blueberry Americano (L)",            "image": "/product/minuman/kopken/Blueberry Americano.png" },
-                      { "id": "kpk-blueberry-frappe-l",             "name": "Blueberry Frappe (L)",               "image": "/product/minuman/kopken/Blueberry Frappe.png" },
                       { "id": "kpk-og-thai-tea-l",                  "name": "OG Thai Tea (L)",                    "image": "/product/minuman/kopken/OG Thai Tea.png" },
                       { "id": "kpk-thai-tea-aren-l",                "name": "Thai Tea Aren (L)",                  "image": "/product/minuman/kopken/Thai Tea Aren.png" },
                       { "id": "kpk-thai-tea-coffee-l",              "name": "Thai Tea Coffee (L)",                "image": "/product/minuman/kopken/Thai Tea Coffe.png" },
@@ -194,8 +185,6 @@
                     "label": "Pilih 3 menu Regular",
                     "chooseCount": 3,
                     "options": [
-                      { "id": "kpk-blueberry-americano",            "name": "Blueberry Americano (R)",            "image": "/product/minuman/kopken/Blueberry Americano.png" },
-                      { "id": "kpk-blueberry-frappe",               "name": "Blueberry Frappe (R)",               "image": "/product/minuman/kopken/Blueberry Frappe.png" },
                       { "id": "kpk-og-thai-tea",                    "name": "OG Thai Tea (R)",                    "image": "/product/minuman/kopken/OG Thai Tea.png" },
                       { "id": "kpk-og-aren-speculoos-latte",        "name": "OG Aren Speculoos Latte (R)",        "image": "/product/minuman/kopken/OG Aren Speculoos Latte.PNG" },
                       { "id": "kpk-pistachio-aren-latte",           "name": "Pistachio Aren Latte (R)",           "image": "/product/minuman/kopken/Pistachio Aren Latte.PNG" },
