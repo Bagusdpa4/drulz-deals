@@ -12,9 +12,11 @@
           "modes": {
             "satuan": {
               "minuman": {
+                "viral 🔥": [
+                  { "id": "kpk-creamy-caramel-latte",          "name": "Creamy Caramel Latte",              "image": "/product/minuman/kopken/Creamy Caramel Latte.PNG",             "sizes": { "R": { "price": 26000, "discPrice": 18000 }, "L": { "price": 33000, "discPrice": 21500 } } }
+                ],
                 "coffee_series": [
                   { "id": "kpk-kopi-kenangan-mantan",          "name": "Kopi Kenangan Mantan",              "image": "/product/minuman/kopken/Kopi Kenangan Mantan.png",             "sizes": { "R": { "price": 19000, "discPrice": 14500 }, "L": { "price": 25000, "discPrice": 17500 } } },
-                  { "id": "kpk-creamy-caramel-latte",          "name": "Creamy Caramel Latte",              "image": "/product/minuman/kopken/Creamy Caramel Latte.PNG",             "sizes": { "R": { "price": 26000, "discPrice": 18000 }, "L": { "price": 33000, "discPrice": 21500 } } },
                   { "id": "kpk-americano",                     "name": "Americano",                         "image": "/product/minuman/kopken/Americano.PNG",                        "sizes": { "R": { "price": 17000, "discPrice": 13500 }, "L": { "price": 22000, "discPrice": 17500 } } },
                   { "id": "kpk-cappuccino",                    "name": "Cappuccino",                        "image": "/product/minuman/kopken/Cappuccino.PNG",                       "sizes": { "R": { "price": 22000, "discPrice": 16000 }, "L": { "price": 29000, "discPrice": 19500 } } },
                   { "id": "kpk-latte",                         "name": "Latte",                             "image": "/product/minuman/kopken/Latte.PNG",                            "sizes": { "R": { "price": 22000, "discPrice": 16000 }, "L": { "price": 29000, "discPrice": 19500 } } },
@@ -106,6 +108,19 @@
             "bundling": [
               {
                 "id": "kpk-b-001",
+                "name": "Creamy Caramel Latte",
+                "price": null,
+                "type": "fixed_choice",
+                "description": "Paket Duo Creamy Caramel Latte",
+                "image": "/bundling kopken/Creamy Caramel Latte.PNG",
+                "fixedOptions": [
+                  { "id": "ccl-2r",   "label": "2 Creamy Caramel Latte Regular",  "price": 33000, "description": "2 Creamy Caramel Latte (Regular)" },
+                  { "id": "ccl-2l",   "label": "2 Creamy Caramel Latte Large",    "price": 41000, "description": "2 Creamy Caramel Latte (Large)" }
+                ],
+                "chooseGroups": []
+              },
+              {
+                "id": "kpk-b-002",
                 "name": "3 menu reguler only 35k",
                 "price": 35000,
                 "description": "Bebas pilih 3 minuman ukuran Regular",
@@ -128,7 +143,7 @@
                 ]
               },
               {
-                "id": "kpk-b-002",
+                "id": "kpk-b-003",
                 "name": "Bundling KKM",
                 "price": null,
                 "type": "fixed_choice",
@@ -138,19 +153,6 @@
                   { "id": "kkm-3l", "label": "3 KKM Large",    "price": 50000, "description": "3 Kopi Kenangan Mantan (Large)" },
                   { "id": "kkm-2l", "label": "2 KKM Large",    "price": 33000, "description": "2 Kopi Kenangan Mantan (Large)" },
                   { "id": "kkm-3r", "label": "3 KKM Reguler",  "price": 38500, "description": "3 Kopi Kenangan Mantan (Reguler)" }
-                ],
-                "chooseGroups": []
-              },
-              {
-                "id": "kpk-b-003",
-                "name": "Creamy Caramel Latte",
-                "price": null,
-                "type": "fixed_choice",
-                "description": "Paket Duo Creamy Caramel Latte",
-                "image": "/bundling kopken/Creamy Caramel Latte.PNG",
-                "fixedOptions": [
-                  { "id": "ccl-2r",   "label": "2 Creamy Caramel Latte Regular",  "price": 33000, "description": "2 Creamy Caramel Latte (Regular)" },
-                  { "id": "ccl-2l",   "label": "2 Creamy Caramel Latte Large",    "price": 41000, "description": "2 Creamy Caramel Latte (Large)" }
                 ],
                 "chooseGroups": []
               },
