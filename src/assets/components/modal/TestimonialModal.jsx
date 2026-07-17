@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight, MessageSquareQuote } from "lucide-react";
 import { useBodyScrollLock } from "../../lib/useBodyScrollLock";
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 10;
 
 export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
   useBodyScrollLock(open);

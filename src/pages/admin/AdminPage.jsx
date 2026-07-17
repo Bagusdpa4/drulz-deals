@@ -27,7 +27,7 @@ export const AdminPage = () => {
   const [uploading, setUploading] = useState(false);
   const [testimonialPage, setTestimonialPage] = useState(0);
 
-  const TESTIMONIAL_PAGE_SIZE = 9;
+  const TESTIMONIAL_PAGE_SIZE = 10;
   const testimonialTotalPages = Math.ceil(
     testimonials.length / TESTIMONIAL_PAGE_SIZE,
   );
