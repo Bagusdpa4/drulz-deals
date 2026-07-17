@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Lock, LogOut, Loader2, ArrowLeft } from "lucide-react";
+import { Lock, LogOut, Loader2, ArrowLeft, Upload, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../assets/lib/supabaseClient";
+import {
+  getTestimonials,
+  uploadTestimonial,
+  deleteTestimonial,
+} from "../../assets/lib/useTestimonials";
 
 export const AdminPage = () => {
   const navigate = useNavigate();
@@ -16,6 +21,10 @@ export const AdminPage = () => {
   const [loadingSettings, setLoadingSettings] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  const [testimonials, setTestimonials] = useState([]);
+  const [loadingTestimonials, setLoadingTestimonials] = useState(true);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -40,6 +49,15 @@ export const AdminPage = () => {
       setLoadingSettings(false);
     };
     fetchSettings();
+
+    const fetchTestimonials = async () => {
+      try {
+        setTestimonials(await getTestimonials());
+      } finally {
+        setLoadingTestimonials(false);
+      }
+    };
+    fetchTestimonials();
   }, [session]);
 
   const handleLogin = async (e) => {
@@ -55,6 +73,35 @@ export const AdminPage = () => {
   };
 
   const handleLogout = () => supabase.auth.signOut();
+
+  const handleUploadTestimonial = async (e) => {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length === 0) return;
+    setUploading(true);
+    let firstError = null;
+    let failCount = 0;
+    for (const file of files) {
+      try {
+        await uploadTestimonial(file);
+      } catch (err) {
+        failCount++;
+        if (!firstError) firstError = err;
+        console.error("Upload gagal:", file.name, err);
+      }
+    }
+    setTestimonials(await getTestimonials());
+    setUploading(false);
+    e.target.value = "";
+    if (firstError) {
+      alert(`${failCount} file gagal upload.\n\nError: ${firstError.message}`);
+    }
+  };
+
+  const handleDeleteTestimonial = async (id, storagePath) => {
+    if (!confirm("Hapus testimoni ini?")) return;
+    await deleteTestimonial(id, storagePath);
+    setTestimonials((prev) => prev.filter((t) => t.id !== id));
+  };
 
   const handleSave = async () => {
     setSaving(true);
@@ -214,6 +261,58 @@ export const AdminPage = () => {
                     ? "Tersimpan ✓"
                     : "Simpan Perubahan"}
               </button>
+
+              {/* BARU: kelola testimonial */}
+              <div className="border-t border-slate-100 pt-4">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">
+                  Testimonial
+                </p>
+                <label className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-dashed border-slate-300 py-4 text-sm font-semibold text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900">
+                  <Upload size={16} />
+                  {uploading ? "Mengupload..." : "Upload Gambar Testimoni"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleUploadTestimonial}
+                    disabled={uploading}
+                    className="hidden"
+                  />
+                </label>
+
+                {loadingTestimonials ? (
+                  <div className="flex justify-center py-6">
+                    <Loader2
+                      className="animate-spin text-neutral-400"
+                      size={20}
+                    />
+                  </div>
+                ) : (
+                  <div className="mt-3 grid grid-cols-3 gap-2">
+                    {testimonials.map((t) => (
+                      <div
+                        key={t.id}
+                        className="group relative aspect-square overflow-hidden rounded-lg"
+                      >
+                        <img
+                          src={t.image_url}
+                          alt="Testimoni"
+                          className="h-full w-full object-cover"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleDeleteTestimonial(t.id, t.storage_path)
+                          }
+                          className="absolute inset-0 flex cursor-pointer items-center justify-center bg-neutral-900/60 text-white opacity-0 transition-opacity group-hover:opacity-100"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

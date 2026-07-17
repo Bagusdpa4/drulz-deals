@@ -1,5 +1,4 @@
-// HeroSection.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Flame, CheckSquare, MessageSquareQuote } from "lucide-react";
 import { GuideOrder } from "../modal/GuideOrder";
@@ -9,9 +8,14 @@ import { getTestimonials } from "../../lib/useTestimonials";
 export const HeroSection = () => {
   const [showGuide, setShowGuide] = useState(false);
   const [showTestimonial, setShowTestimonial] = useState(false);
+  const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
 
-  const testimonials = getTestimonials();
+  useEffect(() => {
+    getTestimonials()
+      .then(setTestimonials)
+      .catch(() => setTestimonials([]));
+  }, []);
 
   return (
     <section className="px-0 pt-4 sm:px-5 sm:pt-6">

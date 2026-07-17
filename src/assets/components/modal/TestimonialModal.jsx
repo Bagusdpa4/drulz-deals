@@ -79,7 +79,7 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
                   className="aspect-3/4 group relative overflow-hidden rounded-xl border border-neutral-300 bg-white"
                 >
                   <img
-                    src={item.image}
+                    src={item.image_url}
                     alt={`Testimoni ${index + 1}`}
                     className="h-full w-full cursor-pointer object-cover transition-transform group-hover:scale-105"
                     loading="lazy"
@@ -131,8 +131,8 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
             className="flex max-h-[75vh] max-w-[70vw] flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={testimonials[activeIndex].image}
+             <img
+              src={testimonials[activeIndex].image_url}
               alt={`Testimoni ${activeIndex + 1}`}
               className="max-h-[75vh] max-w-[75vw] rounded-xl object-contain"
             />

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MessageSquareQuote } from "lucide-react";
 import { TestimonialModal } from "../modal/TestimonialModal";
 import { getTestimonials } from "../../lib/useTestimonials";
 
 export const TestimonialButton = () => {
   const [open, setOpen] = useState(false);
-  const testimonials = getTestimonials();
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    getTestimonials()
+      .then(setTestimonials)
+      .catch(() => setTestimonials([]));
+  }, []);
 
   return (
     <>
