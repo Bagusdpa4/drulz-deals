@@ -14,6 +14,7 @@
               "minuman": {
                 "coffee_series": [
                   { "id": "kpk-kopi-kenangan-mantan",          "name": "Kopi Kenangan Mantan",              "image": "/product/minuman/kopken/Kopi Kenangan Mantan.png",             "sizes": { "R": { "price": 19000, "discPrice": 14500 }, "L": { "price": 25000, "discPrice": 17500 } } },
+                  { "id": "kpk-creamy-caramel-latte",          "name": "Creamy Caramel Latte",              "image": "/product/minuman/kopken/Creamy Caramel Latte.PNG",             "sizes": { "R": { "price": 26000, "discPrice": 18000 }, "L": { "price": 33000, "discPrice": 21500 } } },
                   { "id": "kpk-americano",                     "name": "Americano",                         "image": "/product/minuman/kopken/Americano.PNG",                        "sizes": { "R": { "price": 17000, "discPrice": 13500 }, "L": { "price": 22000, "discPrice": 17500 } } },
                   { "id": "kpk-cappuccino",                    "name": "Cappuccino",                        "image": "/product/minuman/kopken/Cappuccino.PNG",                       "sizes": { "R": { "price": 22000, "discPrice": 16000 }, "L": { "price": 29000, "discPrice": 19500 } } },
                   { "id": "kpk-latte",                         "name": "Latte",                             "image": "/product/minuman/kopken/Latte.PNG",                            "sizes": { "R": { "price": 22000, "discPrice": 16000 }, "L": { "price": 29000, "discPrice": 19500 } } },
@@ -142,6 +143,19 @@
               },
               {
                 "id": "kpk-b-003",
+                "name": "Creamy Caramel Latte",
+                "price": null,
+                "type": "fixed_choice",
+                "description": "Paket Duo Creamy Caramel Latte",
+                "image": "/bundling kopken/Creamy Caramel Latte.PNG",
+                "fixedOptions": [
+                  { "id": "ccl-2r",   "label": "2 Creamy Caramel Latte Regular",  "price": 33000, "description": "2 Creamy Caramel Latte (Regular)" },
+                  { "id": "ccl-2l",   "label": "2 Creamy Caramel Latte Large",    "price": 41000, "description": "2 Creamy Caramel Latte (Large)" }
+                ],
+                "chooseGroups": []
+              },
+              {
+                "id": "kpk-b-004",
                 "name": "Duo Large 35K",
                 "price": 35000,
                 "description": "Bebas pilih 2 minuman ukuran Large",
@@ -175,7 +189,35 @@
                 ]
               },
               {
-                "id": "kpk-b-004",
+                "id": "kpk-b-005",
+                "name": "Ngedate Berdua 35K",
+                "price": 35000,
+                "description": "Pilih 2 Minuman + 2 Makanan",
+                "image": "/bundling kopken/Ngedate Berdua.PNG",
+                "chooseGroups": [
+                  {
+                    "label": "Pilih 2 Minuman (Regular)",
+                    "chooseCount": 2,
+                    "options": [
+                      { "id": "kpk-pistachio-aren-latte",          "name": "Pistachio Aren Latte",              "image": "/product/minuman/kopken/Pistachio Aren Latte.PNG" },
+                      { "id": "kpk-kopi-kenangan-mantan",          "name": "Kopi Kenangan Mantan",              "image": "/product/minuman/kopken/Kopi Kenangan Mantan.png" },
+                      { "id": "kpk-americano",                     "name": "Americano",                         "image": "/product/minuman/kopken/Americano.PNG" },
+                      { "id": "kpk-spanish-latte",                 "name": "Spanish Latte",                     "image": "/product/minuman/kopken/Spanish Latte.png" },
+                      { "id": "kpk-butterscotch-aren-latte",       "name": "Butterscotch Aren Latte",           "image": "/product/minuman/kopken/Butterscotch Aren Latte.PNG" }
+                    ]
+                  },
+                  {
+                    "label": "Pilih 2 Makanan",
+                    "chooseCount": 2,
+                    "options": [
+                      { "id": "kpk-m-sugar-donut",                 "name": "Sugar Donut",                      "image": "/product/makanan/kopken/Sugar Donut.png" },
+                      { "id": "kpk-m-roti-coklat-klasik",          "name": "Roti Coklat Klasik",              "image": "/product/makanan/kopken/Roti Coklat Klasik.png" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "kpk-b-006",
                 "name": "Trio Reguler 45K",
                 "price": 45000,
                 "description": "Bebas pilih 3 minuman ukuran Regular",
