@@ -25,6 +25,16 @@ export const AdminPage = () => {
   const [testimonials, setTestimonials] = useState([]);
   const [loadingTestimonials, setLoadingTestimonials] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [testimonialPage, setTestimonialPage] = useState(0);
+
+  const TESTIMONIAL_PAGE_SIZE = 9;
+  const testimonialTotalPages = Math.ceil(
+    testimonials.length / TESTIMONIAL_PAGE_SIZE,
+  );
+  const testimonialPageItems = testimonials.slice(
+    testimonialPage * TESTIMONIAL_PAGE_SIZE,
+    testimonialPage * TESTIMONIAL_PAGE_SIZE + TESTIMONIAL_PAGE_SIZE,
+  );
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -288,29 +298,63 @@ export const AdminPage = () => {
                     />
                   </div>
                 ) : (
-                  <div className="mt-3 grid grid-cols-3 gap-2">
-                    {testimonials.map((t) => (
-                      <div
-                        key={t.id}
-                        className="group relative aspect-square overflow-hidden rounded-lg"
-                      >
-                        <img
-                          src={t.image_url}
-                          alt="Testimoni"
-                          className="h-full w-full object-cover"
-                        />
+                  <>
+                    <div className="mt-3 grid grid-cols-3 gap-2">
+                      {testimonialPageItems.map((t) => (
+                        <div
+                          key={t.id}
+                          className="group relative aspect-square overflow-hidden rounded-lg"
+                        >
+                          <img
+                            src={t.image_url}
+                            alt="Testimoni"
+                            className="h-full w-full object-cover"
+                          />
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleDeleteTestimonial(t.id, t.storage_path)
+                            }
+                            className="absolute inset-0 flex cursor-pointer items-center justify-center bg-neutral-900/60 text-white opacity-0 transition-opacity group-hover:opacity-100"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    {testimonialTotalPages > 1 && (
+                      <div className="mt-3 flex items-center justify-center gap-3">
                         <button
                           type="button"
                           onClick={() =>
-                            handleDeleteTestimonial(t.id, t.storage_path)
+                            setTestimonialPage((p) => Math.max(0, p - 1))
                           }
-                          className="absolute inset-0 flex cursor-pointer items-center justify-center bg-neutral-900/60 text-white opacity-0 transition-opacity group-hover:opacity-100"
+                          disabled={testimonialPage === 0}
+                          className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-neutral-600 disabled:cursor-not-allowed disabled:opacity-30"
                         >
-                          <Trash2 size={16} />
+                          ‹
+                        </button>
+                        <span className="text-xs font-semibold text-neutral-500">
+                          {testimonialPage + 1} / {testimonialTotalPages}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setTestimonialPage((p) =>
+                              Math.min(testimonialTotalPages - 1, p + 1),
+                            )
+                          }
+                          disabled={
+                            testimonialPage === testimonialTotalPages - 1
+                          }
+                          className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-neutral-600 disabled:cursor-not-allowed disabled:opacity-30"
+                        >
+                          ›
                         </button>
                       </div>
-                    ))}
-                  </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>

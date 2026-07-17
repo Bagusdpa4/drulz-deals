@@ -2,11 +2,20 @@ import React, { useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight, MessageSquareQuote } from "lucide-react";
 import { useBodyScrollLock } from "../../lib/useBodyScrollLock";
 
+const PAGE_SIZE = 9;
+
 export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
   useBodyScrollLock(open);
 
   const [activeIndex, setActiveIndex] = useState(null);
+  const [page, setPage] = useState(0);
   const lightboxOpen = activeIndex !== null;
+
+  const totalPages = Math.ceil(testimonials.length / PAGE_SIZE);
+  const pageItems = testimonials.slice(
+    page * PAGE_SIZE,
+    page * PAGE_SIZE + PAGE_SIZE,
+  );
 
   const goPrev = () =>
     setActiveIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
@@ -25,7 +34,10 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
 
   // Reset lightbox setiap kali modal galeri ditutup
   useEffect(() => {
-    if (!open) setActiveIndex(null);
+    if (!open) {
+      setActiveIndex(null);
+      setPage(0);
+    }
   }, [open]);
 
   if (!open) return null;
@@ -70,26 +82,57 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
               Belum ada testimoni.
             </p>
           ) : (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {testimonials.map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setActiveIndex(index)}
-                  className="aspect-3/4 group relative overflow-hidden rounded-xl border border-neutral-300 bg-white"
-                >
-                  <img
-                    src={item.image_url}
-                    alt={`Testimoni ${index + 1}`}
-                    className="h-full w-full cursor-pointer object-cover transition-transform group-hover:scale-105"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                    }}
-                  />
-                </button>
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {pageItems.map((item, i) => {
+                  const globalIndex = page * PAGE_SIZE + i;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setActiveIndex(globalIndex)}
+                      className="aspect-3/4 group relative overflow-hidden rounded-xl border border-neutral-300 bg-white"
+                    >
+                      <img
+                        src={item.image_url}
+                        alt={`Testimoni ${globalIndex + 1}`}
+                        className="h-full w-full cursor-pointer object-cover transition-transform group-hover:scale-105"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+
+              {totalPages > 1 && (
+                <div className="mt-4 flex items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setPage((p) => Math.max(0, p - 1))}
+                    disabled={page === 0}
+                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-neutral-300 text-neutral-600 disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <span className="text-xs font-semibold text-neutral-500">
+                    {page + 1} / {totalPages}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPage((p) => Math.min(totalPages - 1, p + 1))
+                    }
+                    disabled={page === totalPages - 1}
+                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-neutral-300 text-neutral-600 disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -131,7 +174,7 @@ export const TestimonialModal = ({ open, onClose, testimonials = [] }) => {
             className="flex max-h-[75vh] max-w-[70vw] flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
-             <img
+            <img
               src={testimonials[activeIndex].image_url}
               alt={`Testimoni ${activeIndex + 1}`}
               className="max-h-[75vh] max-w-[75vw] rounded-xl object-contain"
