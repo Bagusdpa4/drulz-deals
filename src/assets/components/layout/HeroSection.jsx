@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Flame, CheckSquare, MessageSquareQuote } from "lucide-react";
+import { FaWhatsapp, FaThreads } from "react-icons/fa6";
 import { GuideOrder } from "../modal/GuideOrder";
 import { TestimonialModal } from "../modal/TestimonialModal";
 import { getTestimonials } from "../../lib/useTestimonials";
+
+const WHATSAPP_CHANNEL_URL = import.meta.env.VITE_WHATSAPP_CHANNEL_URL;
+const THREADS_URL = import.meta.env.VITE_THREADS_URL;
 
 export const HeroSection = () => {
   const [showGuide, setShowGuide] = useState(false);
@@ -41,20 +45,63 @@ export const HeroSection = () => {
               * Harga tertera sudah termasuk fee
             </p>
 
-            <div className="mt-4 flex flex-wrap justify-center gap-2.5 sm:gap-3 lg:justify-start">
+            <div className="mt-4 grid grid-cols-2 justify-center gap-2.5 sm:gap-3 lg:justify-start">
               <button
                 onClick={() => setShowGuide(true)}
-                className="flex cursor-pointer items-center gap-1.5 rounded-full border bg-neutral-900 px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 sm:gap-2 sm:px-5 sm:py-3"
+                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border bg-neutral-900 px-2 py-2.5 text-xs font-semibold text-white transition-transform hover:scale-105 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
               >
-                <CheckSquare size={16} className="animate-bounce" />
+                <CheckSquare
+                  size={14}
+                  className="shrink-0 animate-bounce sm:hidden"
+                />
+                <CheckSquare
+                  size={16}
+                  className="hidden shrink-0 animate-bounce sm:block"
+                />
                 Cara Pemesanan
               </button>
               <button
                 onClick={() => setShowTestimonial(true)}
-                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3"
+                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
               >
-                <MessageSquareQuote size={16} />
+                <MessageSquareQuote size={14} className="shrink-0 sm:hidden" />
+                <MessageSquareQuote
+                  size={16}
+                  className="hidden shrink-0 sm:block"
+                />
                 Testimonial
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  window.open(
+                    WHATSAPP_CHANNEL_URL,
+                    "_blank",
+                    "noopener,noreferrer",
+                  )
+                }
+                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+              >
+                <FaWhatsapp
+                  size={14}
+                  className="shrink-0 text-emerald-500 sm:hidden"
+                />
+                <FaWhatsapp
+                  size={16}
+                  className="hidden shrink-0 text-emerald-500 sm:block"
+                />
+                Saluran WA
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  window.open(THREADS_URL, "_blank", "noopener,noreferrer")
+                }
+                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+              >
+                <FaThreads size={14} className="shrink-0 sm:hidden" />
+                <FaThreads size={16} className="hidden shrink-0 sm:block" />
+                Threads
               </button>
             </div>
           </div>
