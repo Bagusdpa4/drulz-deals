@@ -45,10 +45,10 @@ export const HeroSection = () => {
               * Harga tertera sudah termasuk fee
             </p>
 
-            <div className="mt-4 grid grid-cols-2 justify-center gap-2.5 sm:gap-3 lg:justify-start">
+            <div className="mt-4 flex flex-wrap justify-center gap-2.5 sm:gap-3 lg:justify-start">
               <button
                 onClick={() => setShowGuide(true)}
-                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border bg-neutral-900 px-2 py-2.5 text-xs font-semibold text-white transition-transform hover:scale-105 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+                className="flex w-[calc(50%-0.3125rem)] cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border bg-neutral-900 px-2 py-2.5 text-xs font-semibold text-white transition-transform hover:scale-105 sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <CheckSquare
                   size={14}
@@ -62,7 +62,7 @@ export const HeroSection = () => {
               </button>
               <button
                 onClick={() => setShowTestimonial(true)}
-                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+                className="flex w-[calc(50%-0.3125rem)] cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <MessageSquareQuote size={14} className="shrink-0 sm:hidden" />
                 <MessageSquareQuote
@@ -71,7 +71,7 @@ export const HeroSection = () => {
                 />
                 Testimonial
               </button>
-              <button
+              {/* <button
                 type="button"
                 onClick={() =>
                   window.open(
@@ -80,7 +80,7 @@ export const HeroSection = () => {
                     "noopener,noreferrer",
                   )
                 }
-                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+                className="flex w-[calc(50%-0.3125rem)] cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <FaWhatsapp
                   size={14}
@@ -91,13 +91,13 @@ export const HeroSection = () => {
                   className="hidden shrink-0 text-emerald-500 sm:block"
                 />
                 Saluran WA
-              </button>
+              </button> */}
               <button
                 type="button"
                 onClick={() =>
                   window.open(THREADS_URL, "_blank", "noopener,noreferrer")
                 }
-                className="flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
+                className="flex w-[calc(50%-0.3125rem)] cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-slate-300 bg-white px-2 py-2.5 text-xs font-semibold text-neutral-900 transition-transform hover:scale-105 hover:border-orange-300 sm:w-auto sm:gap-2 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <FaThreads size={14} className="shrink-0 sm:hidden" />
                 <FaThreads size={16} className="hidden shrink-0 sm:block" />
