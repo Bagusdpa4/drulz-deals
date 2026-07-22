@@ -229,6 +229,7 @@ export const ProductOptionModal = ({
       notes: notes.trim() || null,
       unitPrice,
       finalPrice: totalPrice,
+      isPromo: activePrice.isPromo,
     });
     onClose();
   };

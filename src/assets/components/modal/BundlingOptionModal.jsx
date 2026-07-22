@@ -223,10 +223,10 @@ export const BundlingOptionModal = ({
                       key={opt.id}
                       type="button"
                       onClick={() => setFixedOptionId(opt.id)}
-                      className={`flex w-full items-center justify-between rounded-xl border px-3.5 py-3 text-left text-sm transition-colors ${
+                      className={`flex w-full cursor-pointer items-center justify-between rounded-xl border px-3.5 py-3 text-left text-sm transition-colors ${
                         active
                           ? "border-neutral-900 bg-neutral-50"
-                          : "cursor-pointer border-slate-200 bg-white hover:border-orange-300"
+                          : "border-slate-200 bg-white hover:border-orange-300"
                       }`}
                     >
                       <span>

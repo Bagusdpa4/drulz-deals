@@ -7,6 +7,7 @@ import {
   Pencil,
   ShoppingBag,
   ChevronLeft,
+  Zap,
 } from "lucide-react";
 import { formatRupiah } from "../../lib/useCatalog";
 import { useBodyScrollLock } from "../../lib/useBodyScrollLock";
@@ -175,8 +176,14 @@ export const CartSummaryModal = ({
 
                   <div className="flex flex-1 flex-col gap-1">
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-sm font-bold leading-snug text-neutral-900">
+                      <p className="flex flex-wrap items-center gap-1.5 text-sm font-bold leading-snug text-neutral-900">
                         {item.name}
+                        {item.isPromo && (
+                          <span className="flex shrink-0 items-center gap-0.5 rounded-full bg-red-500 px-1.5 py-0.5 text-[9px] font-bold text-white">
+                            <Zap size={9} />
+                            PROMO Terbatas
+                          </span>
+                        )}
                       </p>
                       <div className="flex shrink-0 items-center gap-2.5">
                         <button

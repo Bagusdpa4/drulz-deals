@@ -104,8 +104,10 @@ export const buildWhatsAppOrderMessage = ({ cart, brandLabel, formData }) => {
         ? `~${formatRupiah(originalLineTotal)}~ ${formatRupiah(finalLineTotal)}`
         : formatRupiah(finalLineTotal);
 
+    const promoTag = item.isPromo ? " *🔥PROMO TERBATAS🔥*" : "";
+
     lines.push(
-      `• [${category}]: ${item.name}${variantText} x${qty} - ${priceText}`,
+      `• [${category}]: ${item.name}${promoTag}${variantText} x${qty} - ${priceText}`,
     );
 
     if (item.notes) {
