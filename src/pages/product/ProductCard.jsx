@@ -1,7 +1,10 @@
-// ProductCard.jsx
 import React, { useState } from "react";
-import { Plus, Flame } from "lucide-react";
+import { Plus, Flame, Zap } from "lucide-react";
 import { formatRupiah } from "../../assets/lib/useCatalog";
+import {
+  getEffectivePrice,
+  formatPromoRange,
+} from "../../assets/lib/promoUtils";
 import { ProductOptionModal } from "../../assets/components/modal/ProductOptionModal";
 
 export const ProductCard = ({ product, onAdd }) => {
@@ -9,9 +12,7 @@ export const ProductCard = ({ product, onAdd }) => {
 
   const sizeKeys = product.sizes ? Object.keys(product.sizes) : [];
   const [previewSize, setPreviewSize] = useState(sizeKeys[0] ?? null);
-  const activePrice = product.sizes
-    ? product.sizes[previewSize]
-    : { price: product.price, discPrice: product.discPrice };
+  const activePrice = getEffectivePrice(product, previewSize);
   const discountPercent =
     activePrice?.price && activePrice?.discPrice
       ? Math.round(100 - (activePrice.discPrice / activePrice.price) * 100)
@@ -33,11 +34,18 @@ export const ProductCard = ({ product, onAdd }) => {
             }}
             loading="lazy"
           />
-          {discountPercent > 0 && (
-            <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-1 text-[10px] font-bold text-white">
-              <Flame size={11} />
-              {discountPercent}%
+          {activePrice.isPromo ? (
+            <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-red-500 px-2 py-1 text-[10px] font-bold text-white">
+              <Zap size={11} />
+              PROMO TERBATAS
             </span>
+          ) : (
+            discountPercent > 0 && (
+              <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-1 text-[10px] font-bold text-white">
+                <Flame size={11} />
+                {discountPercent}%
+              </span>
+            )
           )}
         </div>
 
@@ -48,6 +56,11 @@ export const ProductCard = ({ product, onAdd }) => {
           >
             {product.name}
           </h3>
+          {activePrice.isPromo && (
+            <p className="text-[10px] font-bold text-red-500">
+              Berlaku {formatPromoRange(product.promo)}
+            </p>
+          )}
 
           {sizeKeys.length > 1 && (
             <div className="flex gap-1.5">
