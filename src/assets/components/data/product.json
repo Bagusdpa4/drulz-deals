@@ -13,17 +13,6 @@
             "satuan": {
               "minuman": {
                 "viral 🔥": [
-                  {
-                    "id": "kpk-creamy-aren-latte-promo",
-                    "name": "Creamy Aren Latte",
-                    "image": "/product/minuman/kopken/Creamy Aren Latte.png",
-                    "sizes": { "R": { "price": 22000, "discPrice": 16000 } },
-                    "promo": {
-                      "prices": { "R": 10000 },
-                      "startDate": "2026-07-22T00:00:00+07:00",
-                      "endDate": "2026-07-26T23:59:59+07:00"
-                    }
-                  },
                   { "id": "kpk-creamy-caramel-latte",          "name": "Creamy Caramel Latte",              "image": "/product/minuman/kopken/Creamy Caramel Latte.PNG",             "sizes": { "R": { "price": 26000, "discPrice": 18000 }, "L": { "price": 33000, "discPrice": 21500 } } }
                 ],
                 "coffee_series": [
