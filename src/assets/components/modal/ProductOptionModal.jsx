@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { X, Minus, Plus, Flame, Snowflake } from "lucide-react";
 import { formatRupiah } from "../../lib/useCatalog";
+import { getEffectivePrice } from "../../lib/promoUtils";
 
 const ICE_LEVELS = [
   { id: "normal_ice", label: "Normal Ice" },
@@ -180,9 +181,7 @@ export const ProductOptionModal = ({
 
   const activePrice = useMemo(() => {
     if (!product) return { price: 0, discPrice: 0 };
-    return product.sizes
-      ? product.sizes[selectedSize]
-      : { price: product.price, discPrice: product.discPrice };
+    return getEffectivePrice(product, selectedSize);
   }, [product, selectedSize]);
 
   const toppingsTotal = useMemo(
