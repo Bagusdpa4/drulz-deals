@@ -6,6 +6,7 @@ import {
   formatPromoRange,
 } from "../../assets/lib/promoUtils";
 import { ProductOptionModal } from "../../assets/components/modal/ProductOptionModal";
+import { highlightQuotedText } from "../../assets/lib/highlightText";
 
 export const ProductCard = ({ product, onAdd }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -54,7 +55,7 @@ export const ProductCard = ({ product, onAdd }) => {
             onClick={() => setShowOptions(true)}
             className="text-md line-clamp-2 cursor-pointer font-semibold leading-snug text-neutral-900"
           >
-            {product.name}
+            {highlightQuotedText(product.name)}
           </h3>
           {activePrice.isPromo && (
             <p className="text-[10px] font-bold text-red-500">

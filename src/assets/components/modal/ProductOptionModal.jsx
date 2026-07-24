@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { X, Minus, Plus, Flame, Snowflake } from "lucide-react";
 import { formatRupiah } from "../../lib/useCatalog";
 import { getEffectivePrice } from "../../lib/promoUtils";
+import { highlightQuotedText } from "../../lib/highlightText";
 
 const ICE_LEVELS = [
   { id: "normal_ice", label: "Normal Ice" },
@@ -278,7 +279,7 @@ export const ProductOptionModal = ({
         <div className="flex-1 space-y-5 overflow-y-auto bg-slate-100/70 px-5 py-5">
           <div>
             <h2 className="text-lg font-extrabold text-neutral-900">
-              {product.name}
+              {highlightQuotedText(product.name)}
             </h2>
             <p className="mt-0.5 text-sm font-bold text-orange-600">
               {formatRupiah(activePrice?.discPrice ?? activePrice?.price)}
