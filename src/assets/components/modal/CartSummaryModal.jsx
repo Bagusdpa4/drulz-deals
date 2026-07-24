@@ -18,6 +18,7 @@ import {
   MINUTE_OPTIONS,
   ScrollPicker,
 } from "../ui/ScrollPicker";
+import { highlightQuotedText } from "../../lib/highlightText";
 
 // BARU: biaya kantong per brand
 const KANTONG_PRICES = {
@@ -177,7 +178,7 @@ export const CartSummaryModal = ({
                   <div className="flex flex-1 flex-col gap-1">
                     <div className="flex items-start justify-between gap-2">
                       <p className="flex flex-wrap items-center gap-1.5 text-sm font-bold leading-snug text-neutral-900">
-                        {item.name}
+                        {highlightQuotedText(item.name)}
                         {item.isPromo && (
                           <span className="flex shrink-0 items-center gap-0.5 rounded-full bg-red-500 px-1.5 py-0.5 text-[9px] font-bold text-white">
                             <Zap size={9} />
