@@ -7,7 +7,14 @@ export const BundlingCard = ({ bundle, onSelect }) => {
   let priceLabel = "";
   let priceRange = null;
 
-  if (bundle.type === "fixed_choice" && bundle.fixedOptions?.length) {
+  const hasSingleFixedOption =
+    bundle.type === "fixed_choice" && bundle.fixedOptions?.length === 1;
+
+  if (hasSingleFixedOption) {
+    // Cuma 1 opsi paket -> perlakukan seperti bundling harga fix biasa,
+    // tidak perlu label "Pilihan Harga" atau range.
+    displayPrice = bundle.fixedOptions[0].price;
+  } else if (bundle.type === "fixed_choice" && bundle.fixedOptions?.length) {
     const prices = bundle.fixedOptions.map((o) => o.price);
     const min = Math.min(...prices);
     const max = Math.max(...prices);

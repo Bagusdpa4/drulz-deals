@@ -124,6 +124,45 @@
             "bundling": [
               {
                 "id": "kpk-b-001",
+                "name": "Sip🥤+ Bite🍪 30k",
+                "price": 30000,
+                "description": "Pilih 1 Minuman Regular + 1 Makanan",
+                "image": "/bundling kopken/Sip Bite.PNG",
+                "chooseGroups": [
+                  {
+                    "label": "Pilih 1 menu regular",
+                    "chooseCount": 1,
+                    "options": [
+                      { "id": "kpk-banana-choco",                            "name": "Banana Choco 'nctHaechan'",           "image": "/product/minuman/kopken/Banana Choco.PNG"          },
+                      { "id": "kpk-korean-banana-latte",                     "name": "Korean Banana Latte 'nctHaechan'",    "image": "/product/minuman/kopken/Korean Banana Latte.PNG"   },
+                      { "id": "kpk-banana-americano",                        "name": "Banana Americano 'nctHaechan'",       "image": "/product/minuman/kopken/Banana Americano.PNG"      }
+                    ]
+                  },
+                  {
+                    "label": "Pilih 1 Makanan",
+                    "chooseCount": 1,
+                    "options": [
+                      { "id": "kpk-bananachoco-soft-baked-cookie",           "name": "Bananachoco Soft Baked Cookie",        "image": "/product/makanan/kopken/Bananachoco Soft Baked Cookie.PNG" },
+                      { "id": "kpk-sweet-honey-soft-baked-cookie",           "name": "Sweet Honey Soft Baked Cookie",        "image": "/product/makanan/kopken/Sweet Honey Soft Baked Cookie.PNG" },
+                      { "id": "kpk-oatmeal-raisin-soft-baked-cookie",        "name": "Oatmeal Raisin Soft Baked Cookie",     "image": "/product/makanan/kopken/Oatmeal Raisin Soft Baked Cookie.PNG" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "kpk-b-002",
+                "name": "All Haechan 45K",
+                "price": 45000,
+                "type": "fixed_choice",
+                "description": "Paket All Haechan Only 45k",
+                "image": "/bundling kopken/Haechan.PNG",
+                "fixedOptions": [
+                  { "id": "all-haechan",   "label": "All Minuman Haechan",  "price": 45000, "description": "3 Menu Haechan (Regular)" }               
+                ],
+                "chooseGroups": []
+              },
+              {
+                "id": "kpk-b-003",
                 "name": "Creamy Caramel Latte",
                 "price": null,
                 "type": "fixed_choice",
@@ -136,7 +175,7 @@
                 "chooseGroups": []
               },
               {
-                "id": "kpk-b-002",
+                "id": "kpk-b-004",
                 "name": "3 menu reguler only 35k",
                 "price": 35000,
                 "description": "Bebas pilih 3 minuman ukuran Regular",
@@ -159,7 +198,7 @@
                 ]
               },
               {
-                "id": "kpk-b-003",
+                "id": "kpk-b-005",
                 "name": "Bundling KKM",
                 "price": null,
                 "type": "fixed_choice",
@@ -173,7 +212,7 @@
                 "chooseGroups": []
               },
               {
-                "id": "kpk-b-004",
+                "id": "kpk-b-006",
                 "name": "Duo Large 35K",
                 "price": 35000,
                 "description": "Bebas pilih 2 minuman ukuran Large",
@@ -207,7 +246,7 @@
                 ]
               },
               {
-                "id": "kpk-b-005",
+                "id": "kpk-b-007",
                 "name": "Ngedate Berdua 35K",
                 "price": 35000,
                 "description": "Pilih 2 Minuman + 2 Makanan",
@@ -235,7 +274,7 @@
                 ]
               },
               {
-                "id": "kpk-b-006",
+                "id": "kpk-b-008",
                 "name": "Trio Reguler 45K",
                 "price": 45000,
                 "description": "Bebas pilih 3 minuman ukuran Regular",

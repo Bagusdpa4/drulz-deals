@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { X, Minus, Plus, Gift } from "lucide-react";
 import { formatRupiah } from "../../lib/useCatalog";
 import { useBodyScrollLock } from "../../lib/useBodyScrollLock";
+import { highlightQuotedText } from "../../lib/highlightText";
 
 const NOTES_MAX_LENGTH = 250;
 
@@ -21,6 +22,12 @@ export const BundlingOptionModal = ({
   useBodyScrollLock(open);
 
   const isFixedChoice = bundle?.type === "fixed_choice";
+  // BARU: fixed_choice dengan cuma 1 opsi -> treat sebagai bundling harga fix biasa,
+  // gak perlu render UI pilih paket.
+  const hasSingleFixedOption =
+    isFixedChoice && bundle?.fixedOptions?.length === 1;
+  const showFixedChoicePicker = isFixedChoice && !hasSingleFixedOption;
+
   const groups = bundle?.chooseGroups ?? [];
 
   const [groupSelections, setGroupSelections] = useState(() =>
@@ -122,6 +129,8 @@ export const BundlingOptionModal = ({
     return (bundle.price ?? 0) * qty;
   }, [bundle, isFixedChoice, fixedOptionId, groups, groupSelections, qty]);
 
+  // hasSingleFixedOption -> fixedOptionId sudah auto-terisi dari default state,
+  // jadi canSubmit otomatis true tanpa perlu user memilih apa pun.
   const canSubmit = isFixedChoice ? !!fixedOptionId : allGroupsComplete;
 
   if (!open || !bundle) return null;
@@ -202,15 +211,16 @@ export const BundlingOptionModal = ({
                 {bundle.description}
               </p>
             )}
-            {!isFixedChoice && (
+            {/* BARU: tampil kalau bukan fixed_choice ATAU fixed_choice-nya cuma 1 opsi */}
+            {(!isFixedChoice || hasSingleFixedOption) && (
               <p className="mt-1 text-sm font-bold text-orange-600">
                 {formatRupiah(totalPrice)}
               </p>
             )}
           </div>
 
-          {/* === fixed_choice: single select paket harga === */}
-          {isFixedChoice && (
+          {/* === fixed_choice dengan >1 opsi: single select paket harga === */}
+          {showFixedChoicePicker && (
             <div>
               <p className="mb-2 text-xs font-bold uppercase tracking-wide text-neutral-500">
                 Pilih Paket
@@ -247,6 +257,13 @@ export const BundlingOptionModal = ({
                 })}
               </div>
             </div>
+          )}
+
+          {/* BARU: fixed_choice dengan cuma 1 opsi -> tampilkan deskripsi paketnya saja, tanpa pilihan */}
+          {hasSingleFixedOption && bundle.fixedOptions[0].description && (
+            <p className="text-sm text-neutral-500">
+              {bundle.fixedOptions[0].description}
+            </p>
           )}
 
           {/* === chooseGroups: pilih produk, boleh duplikat === */}
@@ -294,7 +311,7 @@ export const BundlingOptionModal = ({
                             />
                             <div>
                               <p className="text-sm font-semibold text-neutral-800">
-                                {option.name}
+                                {highlightQuotedText(option.name)}
                               </p>
                               {option.price != null && (
                                 <p className="text-xs text-neutral-500">
