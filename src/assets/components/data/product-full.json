@@ -23,6 +23,7 @@
                   { "id": "kpk-gochu-macaroni-chicken",                  "name": "Gochu Macaroni Chicken",              "price": 22000, "discPrice": 16000, "image": "/product/makanan/kopken/Gochu Macaroni Chicken.PNG" }
                 ],
                 "coffee_series": [
+                  { "id": "kpk-taro-cloud-latte",              "name": "Taro Cloud Latte",                  "image": "/product/minuman/kopken/Taro Cloud Latte.png",        "noHot": true,         "sizes": { "R": { "price": 22000, "discPrice": 16000 }, "L": { "price": 29000, "discPrice": 20000 } } },
                   { "id": "kpk-korean-banana-latte",           "name": "Korean Banana Latte 'nctHaechan'",  "image": "/product/minuman/kopken/Korean Banana Latte.PNG",              "sizes": { "R": { "price": 23000, "discPrice": 16500 }, "L": { "price": 31000, "discPrice": 20500 } } },
                   { "id": "kpk-banana-americano",              "name": "Banana Americano 'nctHaechan'",     "image": "/product/minuman/kopken/Banana Americano.PNG",                 "sizes": { "R": { "price": 19000, "discPrice": 14500 }, "L": { "price": 27000, "discPrice": 18500 } } },
                   { "id": "kpk-creamy-caramel-latte",          "name": "Creamy Caramel Latte",              "image": "/product/minuman/kopken/Creamy Caramel Latte.PNG",             "sizes": { "R": { "price": 26000, "discPrice": 18000 }, "L": { "price": 33000, "discPrice": 21500 } } },
@@ -52,6 +53,9 @@
                   { "id": "kpk-duo-shot-og-aren",              "name": "Duo Shot OG Aren",                  "image": "/product/minuman/kopken/Dua Shot OG Aren.PNG",                 "sizes": { "R": { "price": 25000, "discPrice": 17500 }, "L": { "price": 32000, "discPrice": 21000 } } }
                 ],
                 "non_coffee_series": [
+                  { "id": "kpk-taro-cloud-matcha",             "name": "Taro Cloud Matcha",                 "image": "/product/minuman/kopken/Taro Cloud Matcha.png",        "noHot": true,         "sizes": { "R": { "price": 22000, "discPrice": 16000 }, "L": { "price": 29000, "discPrice": 20000 } } },
+                  { "id": "kpk-taro-milk",                     "name": "Taro Milk",                         "image": "/product/minuman/kopken/Taro Milk.png",                "noHot": true,         "sizes": { "R": { "price": 19000, "discPrice": 15000 }, "L": { "price": 26000, "discPrice": 18000 } } },
+                  { "id": "kpk-taro-cloud-milk-tea",           "name": "Taro Cloud Milk Tea",               "image": "/product/minuman/kopken/Taro Cloud Milk Tea.png",      "noHot": true,         "sizes": { "R": { "price": 19000, "discPrice": 15000 }, "L": { "price": 26000, "discPrice": 18000 } } },
                   { "id": "kpk-banana-choco",                  "name": "Banana Choco 'nctHaechan'",         "image": "/product/minuman/kopken/Banana Choco.PNG",                        "sizes": { "R": { "price": 24000, "discPrice": 17000 }, "L": { "price": 33000, "discPrice": 21000 } } },
                   { "id": "kpk-og-thai-tea",                   "name": "OG Thai Tea",                       "image": "/product/minuman/kopken/OG Thai Tea.png",                         "sizes": { "R": { "price": 19000, "discPrice": 14500 }, "L": { "price": 23000, "discPrice": 17500 } } },
                   { "id": "kpk-thai-tea-loaded",               "name": "Thai Tea Loaded (L)",               "image": "/product/minuman/kopken/Thai Tea Loaded.jpg",     "noHot": true,  "sizes": { "L": { "price": 27000, "discPrice": 18500 } } },
@@ -89,6 +93,8 @@
               },
               "makanan": {
                 "snack": [
+                  { "id": "kpk-triple-cheese-bagel",                     "name": "Triple Cheese Bagel",                 "price": 19000, "discPrice": 16000, "image": "/product/makanan/kopken/Triple Cheese Bagel.png" },
+                  { "id": "kpk-double-choco-bagel",                      "name": "Double Choco Bagel",                  "price": 19000, "discPrice": 16000, "image": "/product/makanan/kopken/Double Choco Bagel.png" },
                   { "id": "kpk-bananachoco-soft-baked-cookie",           "name": "Bananachoco Soft Baked Cookie",       "price": 18000, "discPrice": 14000, "image": "/product/makanan/kopken/Bananachoco Soft Baked Cookie.PNG" },
                   { "id": "kpk-sweet-honey-soft-baked-cookie",           "name": "Sweet Honey Soft Baked Cookie",       "price": 17000, "discPrice": 13500, "image": "/product/makanan/kopken/Sweet Honey Soft Baked Cookie.PNG" },
                   { "id": "kpk-oatmeal-raisin-soft-baked-cookie",        "name": "Oatmeal Raisin Soft Baked Cookie",    "price": 18000, "discPrice": 14000, "image": "/product/makanan/kopken/Oatmeal Raisin Soft Baked Cookie.PNG" },
